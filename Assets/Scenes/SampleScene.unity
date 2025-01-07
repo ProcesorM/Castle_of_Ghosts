@@ -2898,7 +2898,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomPrefabs:
   - {fileID: 6656624603425028460, guid: cc97ea4c99c80df4997f5731c615b68e, type: 3}
-  - {fileID: 6656624603425028460, guid: 45db36b6f9baf1a4c952706eb0de56bf, type: 3}
+  - {fileID: 6656624603425028460, guid: 085acfdfd5ad6f34db28df1407a3f9aa, type: 3}
   - {fileID: 6656624603425028460, guid: 783a5aa9963b02b46882da2bec9adc9f, type: 3}
   - {fileID: 6656624603425028460, guid: 5b611d11844a0ee42905c7cac055c782, type: 3}
   - {fileID: 6656624603425028460, guid: 2255ef0663c9c784ebd5f635c1d788f0, type: 3}

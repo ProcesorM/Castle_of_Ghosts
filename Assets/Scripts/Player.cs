@@ -50,6 +50,10 @@ public class Player : MonoBehaviour
         {
             movement.x = 1;
         }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            inventory.ToggleInventoryUI();
+        }
 
         if (Input.GetKeyDown(KeyCode.Space) && nearbyNPC != null)
         {

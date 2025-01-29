@@ -12,8 +12,8 @@ public class RoomGenerator : MonoBehaviour
     public GameObject verticalDoorPrefab; // Prefab pro dveře mezi horní a dolní stranou
     public GameObject playerPrefab; // Prefab hráče
     public GameObject keyPrefab; // Prefab klíče
-    public float roomSpacingX = 17f; // Vzdálenost mezi místnostmi na ose X (velikost místnosti)
-    public float roomSpacingY = 10f; // Vzdálenost mezi místnostmi na ose Y (velikost místnosti)
+    public float roomSpacingX = 170f; // Vzdálenost mezi místnostmi na ose X (velikost místnosti)
+    public float roomSpacingY = 100f; // Vzdálenost mezi místnostmi na ose Y (velikost místnosti)
 
     private Room[,] roomGrid;
     private Vector2Int lockedRoomPosition;
@@ -36,10 +36,11 @@ public class RoomGenerator : MonoBehaviour
         new string[] { "kat", "Nosím černou kápi, jsem služebníkem spravedlnosti.", "Má práce je těžká, mou zbraň je sekera.", "Lidé mě znají a přesto se mi vyhýbají.", "Jsem poslední tvář, kterou provinilec spatří." },
     };
 
+    public GameObject staticNPCPrefab; // Prefab statického NPC (bez NPCMovement)
     public List<GameObject> npcPrefabs; // Seznam prefabů pro různá NPC
     public int numberOfNPCs = 3; // Počet NPC, které chceme vytvořit
     public List<List<Vector2Int>> npcPaths; // Seznam cest pro NPC mezi místnostmi
-
+    public GameObject endNpcPrefab;
 
     void Start()
     {
@@ -234,6 +235,10 @@ public class RoomGenerator : MonoBehaviour
         {
             door.LockWithPassword();
         }
+
+        // Spawn end NPC in the locked room
+        Vector2 spawnPosition = new Vector2(passwordLockedRoomPosition.x * roomSpacingX, passwordLockedRoomPosition.y * roomSpacingY);
+        Instantiate(endNpcPrefab, spawnPosition, Quaternion.identity);
     }
 
     void GenerateDungeonLayout()
@@ -447,6 +452,10 @@ public class RoomGenerator : MonoBehaviour
         {
             Vector2 playerSpawnPosition = roomGrid[0, 0].transform.position + new Vector3(0, 1, 0);
             Instantiate(playerPrefab, playerSpawnPosition, Quaternion.identity);
+
+            // Spawn statického NPC v první místnosti
+            Vector2 npcSpawnPosition = roomGrid[0, 0].transform.position + new Vector3(30, 0, 0); // Posun od hráče
+            Instantiate(staticNPCPrefab, npcSpawnPosition, Quaternion.identity);
         }
     }
 

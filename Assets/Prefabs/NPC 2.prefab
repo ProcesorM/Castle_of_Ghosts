@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5964212993374134985
+--- !u!1 &6315148243697119448
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2347907009723952074}
-  - component: {fileID: 3107712471980108864}
-  - component: {fileID: 7091226810827514439}
-  - component: {fileID: 6676986180901761606}
-  - component: {fileID: -2172469536438976496}
-  - component: {fileID: 3147696516822472727}
+  - component: {fileID: 7612344730016652706}
+  - component: {fileID: 8957782715425225161}
+  - component: {fileID: 1313481093986024304}
+  - component: {fileID: 8460701206876921406}
+  - component: {fileID: 217844973318302258}
+  - component: {fileID: 8999940986817456360}
+  - component: {fileID: 7067285665314865364}
   m_Layer: 0
   m_Name: NPC 2
-  m_TagString: NPC
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2347907009723952074
+--- !u!4 &7612344730016652706
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5964212993374134985}
+  m_GameObject: {fileID: 6315148243697119448}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1279.2444, y: 432.22296, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 20, y: 20, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &3107712471980108864
+--- !u!212 &8957782715425225161
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5964212993374134985}
+  m_GameObject: {fileID: 6315148243697119448}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -79,25 +80,59 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.5327544, g: 0, b: 1, a: 1}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -4373088333598493800, guid: 263b141a0b422094494886086a89cae2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.17, y: 0.19}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &7091226810827514439
+--- !u!114 &1313481093986024304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6315148243697119448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eaabb5634b4a7c418e3876dd1645036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcName: "Nezn\xE1m\xE9 NPC"
+  assignedQuest:
+    questName: 
+    questDescription: 
+    isCompleted: 0
+    requiredItemName: 
+  defaultDialogue: []
+  questDialogue: []
+  completedDialogue: []
+--- !u!114 &8460701206876921406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6315148243697119448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58bb305dd9860d245b1f6d081f948685, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+--- !u!61 &217844973318302258
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5964212993374134985}
+  m_GameObject: {fileID: 6315148243697119448}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -129,22 +164,22 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 0.53125, y: 0.59375}
+    newSize: {x: 0.17, y: 0.19}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.17, y: 0.19}
   m_EdgeRadius: 0
---- !u!50 &6676986180901761606
+--- !u!50 &8999940986817456360
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5964212993374134985}
+  m_GameObject: {fileID: 6315148243697119448}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -152,7 +187,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -164,39 +199,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-2172469536438976496
-MonoBehaviour:
+--- !u!95 &7067285665314865364
+Animator:
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5964212993374134985}
+  m_GameObject: {fileID: 6315148243697119448}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58bb305dd9860d245b1f6d081f948685, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
---- !u!114 &3147696516822472727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5964212993374134985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eaabb5634b4a7c418e3876dd1645036, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  npcDialogue:
-  - speakerName: "Kucht\xEDk"
-    dialogueText: "Co chce\u0161?"
-    playerChoices:
-    - choiceText: "J\xE1 nic"
-      nextLineIndex: 1
-  - speakerName: "Kucht\xEDk"
-    dialogueText: "Nech m\u011B bejt!"
-    playerChoices:
-    - choiceText: "Dob\u0159e"
-      nextLineIndex: -1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ce7bbf85a5694274083b35d34c97e8ea, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

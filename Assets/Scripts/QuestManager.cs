@@ -6,6 +6,9 @@ public class QuestManager : MonoBehaviour
     public List<Quest> activeQuests = new List<Quest>();  // Seznam aktivních úkolů
     public List<Quest> completedQuests = new List<Quest>();  // Seznam dokončených úkolů
 
+    public delegate void QuestUpdateHandler();
+    public event QuestUpdateHandler OnQuestUpdated; // Event pro aktualizaci quest logu
+
     public void AddQuest(Quest quest)
     {
         if (!activeQuests.Contains(quest) && !quest.isCompleted)
@@ -13,7 +16,7 @@ public class QuestManager : MonoBehaviour
             activeQuests.Add(quest);
             Debug.Log("Přidán nový úkol: " + quest.questName);
 
-            FindObjectOfType<QuestLog>()?.UpdateQuestLog();
+            OnQuestUpdated?.Invoke();
         }
     }
 
@@ -26,11 +29,7 @@ public class QuestManager : MonoBehaviour
             quest.isCompleted = true;
             Debug.Log("Úkol dokončen: " + quest.questName);
 
-            QuestLog questLog = FindObjectOfType<QuestLog>();
-            if (questLog != null)
-            {
-                questLog.UpdateQuestLog();
-            }
+            OnQuestUpdated?.Invoke();
         }
 
     }

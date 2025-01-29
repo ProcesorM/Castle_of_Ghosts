@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,10 +9,11 @@ public class Inventory : MonoBehaviour
     public Transform slotHolder; // Odkaz na rodiče slotů v inventáři
     public GameObject inventorySlotPrefab; // Prefab slotu v inventáři
 
+    public Text hintDisplayText; // Textové pole v panelu pro zobrazení textu nápovědy
+
     private List<GameObject> inventoryItems = new List<GameObject>();
 
     private List<string> hints = new List<string>();
-    public HintDisplayPanel hintDisplayPanel; // Odkaz na panel pro zobrazení nápovědy
 
     private void Start()
     {
@@ -23,6 +25,23 @@ public class Inventory : MonoBehaviour
         {
             Debug.LogError("Chybí odkaz na rodiče slotů v inventáři!");
         }
+        if (hintDisplayText == null)
+        {
+            Debug.LogError("Chybí odkaz na Text komponentu pro zobrazení nápovědy!");
+        }
+        inventoryUI.SetActive(false);
+    }
+
+    public void ToggleInventoryUI()
+    {
+        if (inventoryUI == null)
+        {
+            Debug.LogError("Inventářový UI panel není přiřazen!");
+            return;
+        }
+
+        // Přepne viditelnost UI panelu
+        inventoryUI.SetActive(!inventoryUI.activeSelf);
     }
 
     public void AddHint(string hintText, Color hintColor)
@@ -74,11 +93,25 @@ public class Inventory : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(hintText))
         {
-            Debug.Log("Nápověda: " + hintText);
-            // Tady můžeš přidat logiku pro zobrazení nápovědy v UI panelu
+            StartCoroutine(DisplayHint(hintText));
+        }
+        else
+        {
+            Debug.LogWarning("Nápověda je prázdná nebo null.");
         }
     }
+    private IEnumerator DisplayHint(string hintText)
+    {
+        // Zobrazí text nápovědy
+        hintDisplayText.text = hintText;
+        hintDisplayText.gameObject.SetActive(true);
 
+        // Počká 3 sekundy
+        yield return new WaitForSeconds(3f);
+
+        // Skryje text nápovědy
+        hintDisplayText.gameObject.SetActive(false);
+    }
 
     public void AddItem(GameObject item)
     {

@@ -19,6 +19,8 @@ public class DialogueManager : MonoBehaviour
 
     public GameObject secondaryPanel; // Druhý panel, který chceme zobrazit
 
+    private System.Action onDialogueEndCallback;
+
     void Start()
     {
         dialoguePanel.SetActive(false);
@@ -37,7 +39,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartDialogue(List<DialogueLine> lines, NPCMovement npc, System.Action onDialogueEnd = null)
+    public void StartDialogue(List<DialogueLine> lines, NPCMovement npc, System.Action onEndCallback = null)
     {
         dialogueLines = lines;
         currentLineIndex = 0;
@@ -45,6 +47,7 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(true);
         secondaryPanel.SetActive(true);
         currentNPC = npc;
+        onDialogueEndCallback = onEndCallback; // Uložení callbacku
 
         if (currentNPC != null)
         {
@@ -54,6 +57,7 @@ public class DialogueManager : MonoBehaviour
 
         DisplayNextLine();
     }
+
 
     void DisplayNextLine()
     {
@@ -129,7 +133,15 @@ public class DialogueManager : MonoBehaviour
 
         if (choice.nextLineIndex == -1)
         {
-            EndDialogue();
+            if (currentNPC != null && currentNPC.GetComponent<EndNPC>() != null)
+            {
+                Debug.Log("EndNPC detekován, hra se ukončuje...");
+                currentNPC.GetComponent<EndNPC>().EndGame();
+            }
+            else
+            {
+                EndDialogue();
+            }
         }
         else
         {
@@ -158,6 +170,9 @@ public class DialogueManager : MonoBehaviour
             currentNPC.ToggleMovement();
         }
         currentNPC = null;
+        // Zavolání callback funkce po ukončení dialogu
+        onDialogueEndCallback?.Invoke();
+        onDialogueEndCallback = null; // Vyčistit po použití
     }
     public void DisplayDynamicResponse(string npcName, string responseText)
     {

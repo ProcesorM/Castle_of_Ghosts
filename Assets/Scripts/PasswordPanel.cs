@@ -7,8 +7,6 @@ public class PasswordPanel : MonoBehaviour
     private Door doorToUnlock;
     private string correctPassword = "heslo"; // Správné heslo (může být nahrazeno generováným heslem)
 
-    //private Player playerScript;
-
     void Start()
     {
         // Nastavení správného hesla z vybrané hádanky
@@ -18,22 +16,11 @@ public class PasswordPanel : MonoBehaviour
             correctPassword = roomGenerator.correctPassword;
         }
 
-        // Najdi hráče a jeho skript Player
-        //GameObject player = GameObject.FindGameObjectWithTag("Player");
-        //if (player != null)
-        //{
-        //    playerScript = player.GetComponent<Player>();
-        //}
     }
     public void SetDoorToUnlock(Door door)
     {
         doorToUnlock = door;
 
-        // Deaktivuj pohybový skript hráče, když se otevře panel pro zadání hesla
-        //if (playerScript != null)
-        //{
-        //    playerScript.enabled = false;
-        //}
     }
 
     public void OnSubmitPassword()
@@ -46,11 +33,7 @@ public class PasswordPanel : MonoBehaviour
             doorToUnlock.SetGreenColor(); // Změň barvu dveří na zelenou
             gameObject.SetActive(false); // Skryj panel po úspěšném zadání hesla
 
-            // Aktivuj pohybový skript hráče
-            //if (playerScript != null)
-            //{
-            //    playerScript.enabled = true;
-            //}
+
         }
         else
         {
@@ -62,10 +45,6 @@ public class PasswordPanel : MonoBehaviour
     {
         gameObject.SetActive(false); // Skryje panel, pokud se hráč rozhodne zrušit zadání hesla
 
-        // Aktivuj pohybový skript hráče
-        //if (playerScript != null)
-        //{
-        //    playerScript.enabled = true;
-        //}
+
     }
 }

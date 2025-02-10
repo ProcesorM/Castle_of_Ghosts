@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 6676986180901761606}
   - component: {fileID: -2172469536438976496}
   - component: {fileID: 3147696516822472727}
+  - component: {fileID: 551125640466613754}
+  - component: {fileID: 4220979336489453800}
   m_Layer: 0
   m_Name: NPC
   m_TagString: NPC
@@ -195,6 +197,7 @@ MonoBehaviour:
     questDescription: najdi diamant
     isCompleted: 0
     requiredItemName: Diamant
+    questGiver: {fileID: 5964212993374134985}
   defaultDialogue:
   - speakerName: Princ
     dialogueText: "Zdrav\xEDm, ztratil jsem to n\u011Bkde diamant. Pom\u016F\u017Ee\u0161
@@ -228,3 +231,36 @@ MonoBehaviour:
       nextLineIndex: -1
       startsQuest: 0
       checkForItem: 0
+--- !u!114 &551125640466613754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5964212993374134985}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b19a2a9c5d7cac45a2e135aa7f689f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quest:
+    questName: Najdi diamant
+    questDescription: najdi diamant
+    isCompleted: 0
+    requiredItemName: Diamant
+    questGiver: {fileID: 0}
+  hintReward: 
+--- !u!114 &4220979336489453800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5964212993374134985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 107c5fb830ae1df4cbd5b1c8b3ac2c5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hintText: 
+  hintItemPrefab: {fileID: 5964212993374134985, guid: 954381efb70b6894283a9cfa9fb0422e, type: 3}

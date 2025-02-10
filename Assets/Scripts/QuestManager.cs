@@ -30,8 +30,19 @@ public class QuestManager : MonoBehaviour
             Debug.Log("Úkol dokončen: " + quest.questName);
 
             OnQuestUpdated?.Invoke();
-        }
 
+            // Hledáme NPC, které zadalo quest a zkontrolujeme, zda má HintGiver
+            HintGiver hintGiver = quest.questGiver.GetComponent<HintGiver>();
+            if (hintGiver != null)
+            {
+                Debug.Log("NPC má HintGiver, spawnuji nápovědu...");
+                hintGiver.CompleteQuest(); // Zavolá metodu, která spawne hint
+            }
+            else
+            {
+                Debug.Log("NPC nemá HintGiver, žádná nápověda nebude spawnuta.");
+            }
+        }
     }
     public void TryCompleteQuest(Quest quest, Inventory inventory)
     {

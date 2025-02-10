@@ -23,6 +23,18 @@ public class EndNPC : MonoBehaviour
 
     void StartEndDialogue()
     {
+        if (dialogueManager == null)
+        {
+            Debug.LogError("EndNPC: DialogueManager nebyl nalezen! Ujisti se, že je ve scéně.");
+            return;
+        }
+
+        if (endDialogue == null || endDialogue.Count == 0)
+        {
+            Debug.LogError("EndNPC: Seznam dialogů je prázdný! Přidej dialog do EndNPC v Unity Inspectoru.");
+            return;
+        }
+
         dialogueManager.StartDialogue(endDialogue, null, EndGame);
     }
 
@@ -49,4 +61,9 @@ public class EndNPC : MonoBehaviour
             isPlayerInRange = false;
         }
     }
+    public void SetDialogueManager(DialogueManager manager)
+    {
+        dialogueManager = manager;
+    }
+
 }

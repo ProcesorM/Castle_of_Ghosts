@@ -13,6 +13,8 @@ public class Door : MonoBehaviour
 
     public Vector2Int connectedRoomPosition; // Pozice místnosti, na kterou tyto dveře vedou
 
+    private BoxCollider2D blockingCollider;
+
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -67,6 +69,11 @@ public class Door : MonoBehaviour
         isLocked = false;
         isPasswordLocked = false;
         GetComponent<BoxCollider2D>().isTrigger = true; // Dveře jsou odemčené, lze jimi projít
+        if (blockingCollider != null)
+        {
+            Destroy(blockingCollider);
+            blockingCollider = null;
+        }
         Debug.Log("Dveře odemčeny: " + gameObject.name);
     }
 
@@ -90,5 +97,9 @@ public class Door : MonoBehaviour
             return connectedDoor.transform.parent.GetComponent<Room>();
         }
         return null;
+    }
+    public void SetBlockingCollider(BoxCollider2D collider)
+    {
+        blockingCollider = collider;
     }
 }

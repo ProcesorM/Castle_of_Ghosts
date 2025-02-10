@@ -131,14 +131,6 @@ public class Inventory : MonoBehaviour
         Debug.Log($"Přidávám předmět do inventáře: '{item.GetComponent<Item>()?.itemName}'");
         UpdateInventoryUI(item);
     }
-
-
-
-
-
-
-
-
     private void UpdateInventoryUI(GameObject item)
     {
         if (slotHolder == null) return;
@@ -176,8 +168,6 @@ public class Inventory : MonoBehaviour
             Debug.LogError("Nelze nastavit název předmětu, chybí komponenty!");
         }
     }
-
-
     public void RemoveItemByName(string itemName)
     {
         Debug.Log($"Mazání předmětu z inventáře: Hledám '{itemName}'");
@@ -212,17 +202,6 @@ public class Inventory : MonoBehaviour
 
         Debug.LogWarning($"Předmět '{itemName}' nebyl nalezen v inventáři.");
     }
-
-
-
-
-
-
-
-
-
-
-
     public bool HasItem(string itemName)
     {
         Debug.Log($"Kontrola předmětu v inventáři: Hledám '{itemName}'");
@@ -246,19 +225,6 @@ public class Inventory : MonoBehaviour
         Debug.Log($"Předmět '{itemName}' není v inventáři.");
         return false;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
     private void UpdateInventoryUIAfterRemoval()
     {
         foreach (Transform child in slotHolder)

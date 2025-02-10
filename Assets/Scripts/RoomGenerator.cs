@@ -56,7 +56,7 @@ public class RoomGenerator : MonoBehaviour
         int randomIndex = Random.Range(0, puzzles.Count);
         selectedPuzzle = puzzles[randomIndex];
         correctPassword = selectedPuzzle[0];
-        PlaceHints();
+        //PlaceHints();
 
         GenerateNPCPaths();
         SpawnNPCs();
@@ -76,9 +76,8 @@ public class RoomGenerator : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < numberOfNPCs; i++)
+        for (int i = 0; i < 4; i++)  // 4 NPC s nápovědami
         {
-            // Zajistíme, že nebudeme mít více NPC než je počet prefabů nebo tras
             if (i >= npcPrefabs.Count || i >= npcPaths.Count)
             {
                 Debug.LogWarning("Není dostatek tras nebo prefabů pro NPC s indexem: " + i);
@@ -92,24 +91,27 @@ public class RoomGenerator : MonoBehaviour
                 continue;
             }
 
-            // Vyber startovní pozici pro NPC (první waypoint v cestě)
             Vector2Int startRoomPosition = npcPath[0];
             Vector2 spawnPosition = new Vector2(startRoomPosition.x * roomSpacingX, startRoomPosition.y * roomSpacingY);
 
-            // Vytvoř NPC pomocí jeho specifického prefabu
             GameObject npc = Instantiate(npcPrefabs[i], spawnPosition, Quaternion.identity);
             NPCMovement npcMovement = npc.GetComponent<NPCMovement>();
 
             if (npcMovement != null)
             {
-                npcMovement.SetPath(npcPath); // Přiřaď NPC jeho vlastní trasu
+                npcMovement.SetPath(npcPath);  // Nastavíme trasu pohybu
             }
-            else
+
+            // Nastavíme NPC nápovědu jako odměnu
+            HintGiver hintGiver = npc.GetComponent<HintGiver>();
+            if (hintGiver != null)
             {
-                Debug.LogError("NPC prefab nemá komponentu NPCMovement: " + npcPrefabs[i].name);
+                hintGiver.SetHintText(selectedPuzzle[i + 1]);  // NPC dostane část nápovědy
             }
         }
     }
+
+
 
     void GenerateNPCPaths()
     {
@@ -175,47 +177,47 @@ public class RoomGenerator : MonoBehaviour
 
 
 
-    void PlaceHints()
-    {
-        List<Vector2Int> availablePositions = new List<Vector2Int>();
+    //void PlaceHints()
+    //{
+    //    List<Vector2Int> availablePositions = new List<Vector2Int>();
 
-        // Projdi všechny pozice v gridu a přidej je do seznamu dostupných pozic, kromě zamčených místností
-        for (int x = 0; x < gridWidth; x++)
-        {
-            for (int y = 0; y < gridHeight; y++)
-            {
-                if (roomGrid[x, y] != null && !(new Vector2Int(x, y) == lockedRoomPosition) && !(new Vector2Int(x, y) == passwordLockedRoomPosition))
-                {
-                    availablePositions.Add(new Vector2Int(x, y));
-                }
-            }
-        }
+    //    // Projdi všechny pozice v gridu a přidej je do seznamu dostupných pozic, kromě zamčených místností
+    //    for (int x = 0; x < gridWidth; x++)
+    //    {
+    //        for (int y = 0; y < gridHeight; y++)
+    //        {
+    //            if (roomGrid[x, y] != null && !(new Vector2Int(x, y) == lockedRoomPosition) && !(new Vector2Int(x, y) == passwordLockedRoomPosition))
+    //            {
+    //                availablePositions.Add(new Vector2Int(x, y));
+    //            }
+    //        }
+    //    }
 
-        // Umísti všechny 4 nápovědy
-        for (int i = 1; i <= 4; i++)
-        {
-            if (availablePositions.Count == 0)
-            {
-                Debug.LogError("Není dostatek volných místností pro umístění nápověd.");
-                return;
-            }
+    //    // Umísti všechny 4 nápovědy
+    //    for (int i = 1; i <= 4; i++)
+    //    {
+    //        if (availablePositions.Count == 0)
+    //        {
+    //            Debug.LogError("Není dostatek volných místností pro umístění nápověd.");
+    //            return;
+    //        }
 
-            // Vyber náhodnou pozici pro nápovědu
-            int randomPositionIndex = Random.Range(0, availablePositions.Count);
-            Vector2Int hintPosition = availablePositions[randomPositionIndex];
-            availablePositions.RemoveAt(randomPositionIndex);
+    //        // Vyber náhodnou pozici pro nápovědu
+    //        int randomPositionIndex = Random.Range(0, availablePositions.Count);
+    //        Vector2Int hintPosition = availablePositions[randomPositionIndex];
+    //        availablePositions.RemoveAt(randomPositionIndex);
 
-            Vector2 spawnPosition = new Vector2(hintPosition.x * roomSpacingX, hintPosition.y * roomSpacingY);
+    //        Vector2 spawnPosition = new Vector2(hintPosition.x * roomSpacingX, hintPosition.y * roomSpacingY);
 
-            // Vytvoř nápovědu a nastav její text
-            GameObject hintObject = Instantiate(hintPrefab, spawnPosition, Quaternion.identity);
-            Hint hintComponent = hintObject.GetComponent<Hint>();
-            if (hintComponent != null)
-            {
-                hintComponent.SetHintText(selectedPuzzle[i]);
-            }
-        }
-    }
+    //        // Vytvoř nápovědu a nastav její text
+    //        GameObject hintObject = Instantiate(hintPrefab, spawnPosition, Quaternion.identity);
+    //        Hint hintComponent = hintObject.GetComponent<Hint>();
+    //        if (hintComponent != null)
+    //        {
+    //            hintComponent.SetHintText(selectedPuzzle[i]);
+    //        }
+    //    }
+    //}
 
     void LockPasswordRoom()
     {
@@ -230,16 +232,45 @@ public class RoomGenerator : MonoBehaviour
         Room lockedRoom = roomGrid[passwordLockedRoomPosition.x, passwordLockedRoomPosition.y];
         lockedRoom.LockRoom();
 
-        // Nastav dveře na modrou barvu a označ je jako zamčené na heslo
+        // Najdi dveře v této místnosti a zamkni je heslem
         foreach (Door door in lockedRoom.doors)
         {
             door.LockWithPassword();
+
+            // Přidej blokující Collider
+            BoxCollider2D blockingCollider = door.gameObject.AddComponent<BoxCollider2D>();
+            blockingCollider.isTrigger = false; // Tento collider blokuje průchod
+            blockingCollider.size = new Vector2(0.8f, 0.8f); // Zmenšená velikost
+
+            // Ulož referenci na blokující collider
+            door.SetBlockingCollider(blockingCollider);
         }
 
-        // Spawn end NPC in the locked room
-        Vector2 spawnPosition = new Vector2(passwordLockedRoomPosition.x * roomSpacingX, passwordLockedRoomPosition.y * roomSpacingY);
-        Instantiate(endNpcPrefab, spawnPosition, Quaternion.identity);
+        if (endNpcPrefab != null)
+        {
+            Vector2 spawnPosition = new Vector2(passwordLockedRoomPosition.x * roomSpacingX, passwordLockedRoomPosition.y * roomSpacingY);
+            GameObject endNpcObject = Instantiate(endNpcPrefab, spawnPosition, Quaternion.identity);
+
+            // Najdi a nastav správného DialogueManager
+            EndNPC endNpcScript = endNpcObject.GetComponent<EndNPC>();
+            DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
+
+            if (endNpcScript != null && dialogueManager != null)
+            {
+                endNpcScript.SetDialogueManager(dialogueManager);
+            }
+            else
+            {
+                Debug.LogError("Chyba při přiřazování DialogueManager k EndNPC!");
+            }
+        }
+        else
+        {
+            Debug.LogError("EndNPC Prefab není přiřazen v RoomGenerator!");
+        }
+
     }
+
 
     void GenerateDungeonLayout()
     {

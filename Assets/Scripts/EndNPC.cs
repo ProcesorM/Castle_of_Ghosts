@@ -41,9 +41,7 @@ public class EndNPC : MonoBehaviour
     public void EndGame()
     {
         Debug.Log("Hra ukončena!");
-        Application.Quit();  // Ukončení aplikace
-        // Pro testování v Unity Editoru lze použít
-        // UnityEditor.EditorApplication.isPlaying = false;
+        SceneManager.LoadScene("MainMenu"); // Vrátí hráče do menu
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

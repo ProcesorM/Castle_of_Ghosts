@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 
     private NPCMovement nearbyNPC; // Odkaz na blízké NPC
 
+    private bool canMove = true;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,6 +31,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if(!canMove)
+        {
+            return;
+        }
+
         movement.x = 0;
         movement.y = 0;
 
@@ -54,16 +60,20 @@ public class Player : MonoBehaviour
         {
             inventory.ToggleInventoryUI();
         }
-
-        if (Input.GetKeyDown(KeyCode.Space) && nearbyNPC != null)
-        {
-            nearbyNPC.ToggleMovement(); // Zastaví nebo obnoví pohyb NPC
-        }
     }
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        if(canMove)
+        {
+            rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        }
+        
+    }
+
+    public void SetMovementEnabled(bool isEnabled)
+    {
+        canMove = isEnabled;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

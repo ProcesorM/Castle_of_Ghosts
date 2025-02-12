@@ -3073,9 +3073,9 @@ MonoBehaviour:
   staticNPCPrefab: {fileID: 5964212993374134985, guid: da31c6b00cd843a4ca2a92d7bdfe6811, type: 3}
   npcPrefabs:
   - {fileID: 5964212993374134985, guid: d7559472c58977248aec332c268f2761, type: 3}
-  - {fileID: 6315148243697119448, guid: 856ab2f234e4b314098893ae55a3e832, type: 3}
-  - {fileID: 6315148243697119448, guid: 856ab2f234e4b314098893ae55a3e832, type: 3}
-  - {fileID: 6315148243697119448, guid: 856ab2f234e4b314098893ae55a3e832, type: 3}
+  - {fileID: 5964212993374134985, guid: 1a88d22fc49542e46bb6e3550d88cfe8, type: 3}
+  - {fileID: 5964212993374134985, guid: 7e85950a4e4570b46a3ead3fca6e17f5, type: 3}
+  - {fileID: 5964212993374134985, guid: 8ba569b81c253a643825b2ff73af0b48, type: 3}
   numberOfNPCs: 4
   endNpcPrefab: {fileID: 5964212993374134985, guid: 0a087659aadc77e47b80b0aea50a0def, type: 3}
 --- !u!1001 &1306465031423010810
@@ -3123,6 +3123,14 @@ PrefabInstance:
       value: 0.06170106
       objectReference: {fileID: 0}
     - target: {fileID: 1057108222118467419, guid: d782cfa3912e00240b4f17f324df2856, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 5.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1057108222118467419, guid: d782cfa3912e00240b4f17f324df2856, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1057108222118467419, guid: d782cfa3912e00240b4f17f324df2856, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 5.25
       objectReference: {fileID: 0}
@@ -3131,9 +3139,17 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1114336105685053053, guid: d782cfa3912e00240b4f17f324df2856, type: 3}
+      propertyPath: m_Size.x
+      value: 5.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114336105685053053, guid: d782cfa3912e00240b4f17f324df2856, type: 3}
+      propertyPath: m_Size.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114336105685053053, guid: d782cfa3912e00240b4f17f324df2856, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 4334783836991956000, guid: 50fd513cdec61484788aae20ffb88773, type: 3}
+      objectReference: {fileID: 3898716794514077813, guid: e1fa1a6ef722a1441b086e5792da0b30, type: 3}
     - target: {fileID: 1114336105685053053, guid: d782cfa3912e00240b4f17f324df2856, type: 3}
       propertyPath: m_Color.b
       value: 0.9607843
@@ -3148,6 +3164,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1114336105685053053, guid: d782cfa3912e00240b4f17f324df2856, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114336105685053053, guid: d782cfa3912e00240b4f17f324df2856, type: 3}
+      propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1657560960978796473, guid: d782cfa3912e00240b4f17f324df2856, type: 3}

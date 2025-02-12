@@ -51,8 +51,7 @@ public class DialogueManager : MonoBehaviour
 
         if (currentNPC != null)
         {
-            currentNPC.ToggleMovement();
-            currentNPC.speed = 0f; // Zastavíme pohyb NPC
+            currentNPC.StopMovement();
         }
 
         DisplayNextLine();
@@ -167,7 +166,7 @@ public class DialogueManager : MonoBehaviour
 
         if (currentNPC != null)
         {
-            currentNPC.ToggleMovement();
+            currentNPC.ResumeMovement();
         }
         currentNPC = null;
         // Zavolání callback funkce po ukončení dialogu

@@ -42,6 +42,8 @@ public class RoomGenerator : MonoBehaviour
     public List<List<Vector2Int>> npcPaths; // Seznam cest pro NPC mezi místnostmi
     public GameObject endNpcPrefab;
 
+    private Queue<string> hintQueue = new Queue<string>();
+
     void Start()
     {
         availableRoomPrefabs = new List<GameObject>(roomPrefabs); // Vytvoří kopii seznamu prefabů
@@ -58,9 +60,30 @@ public class RoomGenerator : MonoBehaviour
         correctPassword = selectedPuzzle[0];
         //PlaceHints();
 
+        GenerateHints();
         GenerateNPCPaths();
         SpawnNPCs();
         
+    }
+    public string GetNextHint()
+    {
+        if (hintQueue.Count > 0)
+        {
+            return hintQueue.Dequeue(); // Vrátí a odstraní první nápovědu z fronty
+        }
+        return "Žádné další nápovědy"; // Fallback text
+    }
+
+    void GenerateHints()
+    {
+        hintQueue.Clear();
+        int randomIndex = Random.Range(0, puzzles.Count);
+        selectedPuzzle = puzzles[randomIndex];
+
+        for (int i = 1; i <= 4; i++)
+        {
+            hintQueue.Enqueue(selectedPuzzle[i]);
+        }
     }
     void SpawnNPCs()
     {

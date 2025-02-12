@@ -31,12 +31,22 @@ public class QuestManager : MonoBehaviour
 
             OnQuestUpdated?.Invoke();
 
-            // Hledáme NPC, které zadalo quest a zkontrolujeme, zda má HintGiver
+            // Najdi NPC, které zadalo quest a zkontroluj, zda má HintGiver
             HintGiver hintGiver = quest.questGiver.GetComponent<HintGiver>();
             if (hintGiver != null)
             {
-                Debug.Log("NPC má HintGiver, spawnuji nápovědu...");
-                hintGiver.CompleteQuest(); // Zavolá metodu, která spawne hint
+                // Vezmeme nápovědu z RoomGenerator
+                RoomGenerator roomGenerator = FindObjectOfType<RoomGenerator>();
+                if (roomGenerator != null)
+                {
+                    string hintText = roomGenerator.GetNextHint();
+                    Debug.Log("NPC má HintGiver, spawnuji nápovědu: " + hintText);
+                    hintGiver.GiveHint(hintText);
+                }
+                else
+                {
+                    Debug.LogError("RoomGenerator nebyl nalezen!");
+                }
             }
             else
             {
@@ -44,6 +54,7 @@ public class QuestManager : MonoBehaviour
             }
         }
     }
+
     public void TryCompleteQuest(Quest quest, Inventory inventory)
     {
         if (quest == null)

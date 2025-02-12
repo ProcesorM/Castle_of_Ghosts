@@ -10,6 +10,7 @@ public class NPCMovement : MonoBehaviour
     private bool movingForward = true; // Určuje směr pohybu (vpřed nebo zpět)
 
     private bool isMoving = true; // Určuje, zda se NPC pohybuje
+    private float originalSpeed; // Původní rychlost NPC
 
     void Start()
     {
@@ -21,6 +22,7 @@ public class NPCMovement : MonoBehaviour
             npcPath = roomGenerator.npcPaths[Random.Range(0, roomGenerator.npcPaths.Count)];
             currentWaypointIndex = 0;
         }
+        originalSpeed = speed;
     }
 
     void Update()
@@ -31,20 +33,17 @@ public class NPCMovement : MonoBehaviour
         }
     }
 
-    public void ToggleMovement()
+    public void StopMovement()
     {
-        isMoving = !isMoving; // Přepnutí stavu pohybu
-        Debug.Log("NPC pohyb: " + (isMoving ? "Pohyb povolen" : "Pohyb zastaven"));
+        isMoving = false;
+        originalSpeed = speed; // Uložíme aktuální rychlost
+        speed = 0f; // Zastavíme NPC
+    }
 
-        // Pokud NPC má být zastaveno, nastavíme rychlost na 0, aby se pohyb zastavil úplně
-        if (!isMoving)
-        {
-            speed = 0f;
-        }
-        else
-        {
-            speed = 5f;
-        }
+    public void ResumeMovement()
+    {
+        isMoving = true;
+        speed = originalSpeed; // Vrátíme rychlost zpět na původní hodnotu
     }
 
     public void SetPath(List<Vector2Int> path)

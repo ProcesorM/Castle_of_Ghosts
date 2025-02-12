@@ -83,7 +83,7 @@ public class Door : MonoBehaviour
     }
     public void SetGreenColor()
     {
-        GetComponent<SpriteRenderer>().color = Color.blue;
+        GetComponent<SpriteRenderer>().color = Color.green;
     }
     public void SetConnectedRoomPosition(Vector2Int position)
     {

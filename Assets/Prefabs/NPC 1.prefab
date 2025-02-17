@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 6676986180901761606}
   - component: {fileID: -2172469536438976496}
   - component: {fileID: 3147696516822472727}
-  - component: {fileID: 551125640466613754}
   - component: {fileID: 4220979336489453800}
   m_Layer: 0
   m_Name: NPC 1
@@ -191,65 +190,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eaabb5634b4a7c418e3876dd1645036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcName: Princ
+  npcName: Alaric
   assignedQuest:
-    questName: Najdi diamant
-    questDescription: najdi diamant
+    questName: "Elix\xEDr \u017Eivota"
+    questDescription: "Najdi elix\xEDr \u017Eivota"
     isCompleted: 0
-    requiredItemName: Diamant
+    requiredItemName: "Elix\xEDr"
     questGiver: {fileID: 5964212993374134985}
   defaultDialogue:
-  - speakerName: Princ
-    dialogueText: "Zdrav\xEDm, ztratil jsem to n\u011Bkde diamant. Pom\u016F\u017Ee\u0161
-      mi ho naj\xEDt?"
+  - speakerName: Alaric
+    dialogueText: "Byl jsem alchymistou, ale m\xE9 pokusy z\u016Fstaly nedokon\u010Deny.
+      Jen kapka spr\xE1vn\xE9ho elix\xEDru mi d\xE1 klid."
     playerChoices:
     - choiceText: "Ano, pom\u016F\u017Eu ti."
       nextLineIndex: -1
       startsQuest: 1
       checkForItem: 0
-    - choiceText: Ne
+    - choiceText: Ne.
       nextLineIndex: -1
       startsQuest: 0
       checkForItem: 0
   questDialogue:
-  - speakerName: Princ
-    dialogueText: "U\u017E m\xE1\u0161 m\u016Fj diamant?"
+  - speakerName: Alaric
+    dialogueText: "Jestli dok\xE1\u017Ee\u0161 naj\xEDt elix\xEDr \u017Eivota, mo\u017En\xE1
+      se kone\u010Dn\u011B osvobod\xEDm z t\u011Bchto zd\xED."
     playerChoices:
-    - choiceText: Ano
+    - choiceText: Tady je.
       nextLineIndex: -1
       startsQuest: 0
       checkForItem: 1
-    - choiceText: Ne
+    - choiceText: "Dob\u0159e."
       nextLineIndex: -1
       startsQuest: 0
       checkForItem: 0
   completedDialogue:
-  - speakerName: Princ
-    dialogueText: "Moc ti d\u011Bkuji za pomoc!"
+  - speakerName: Alaric
+    dialogueText: "C\xEDt\xEDm, jak se m\xE9 du\u0161i vrac\xED m\xEDr\u2026 Tv\xE1
+      odm\u011Bna je v\u011Bd\u011Bn\xED!"
     playerChoices:
-    - choiceText: "Nen\xED za\u010D"
+    - choiceText: "D\xEDky a nen\xED za\u010D!"
       nextLineIndex: -1
       startsQuest: 0
       checkForItem: 0
---- !u!114 &551125640466613754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5964212993374134985}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b19a2a9c5d7cac45a2e135aa7f689f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  quest:
-    questName: Najdi diamant
-    questDescription: najdi diamant
-    isCompleted: 0
-    requiredItemName: Diamant
-    questGiver: {fileID: 0}
-  hintReward: 
 --- !u!114 &4220979336489453800
 MonoBehaviour:
   m_ObjectHideFlags: 0

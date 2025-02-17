@@ -189,26 +189,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eaabb5634b4a7c418e3876dd1645036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcName: "Star\xFD mnich"
+  npcName: Bratr Gregorius
   assignedQuest:
-    questName: "Pora\u017E zlo"
-    questDescription: 
+    questName: "Ukon\u010Den\xED zla"
+    questDescription: "Ukon\u010Di zlo na hrad\u011B a osvobo\u010F du\u0161e duch\u016F"
     isCompleted: 0
     requiredItemName: 
+    questGiver: {fileID: 0}
   defaultDialogue:
-  - speakerName: "Star\xFD mnich"
+  - speakerName: Bratr Gregorius
     dialogueText: "V\xEDtej vyvolen\xFD!"
     playerChoices:
     - choiceText: "Co\u017Ee?"
       nextLineIndex: 1
       startsQuest: 0
       checkForItem: 0
-  - speakerName: "Star\xFD mnich"
-    dialogueText: "Pora\u017E zlo, jen\u017E se zde nach\xE1z\xED!"
+  - speakerName: Bratr Gregorius
+    dialogueText: "Kdysi jsme tu byli brat\u0159i\u2026 Modlili jsme se, studovali,
+      ale zlo v hrad\u011B n\xE1s jednoho po druh\xE9m pohltilo. Jsem posledn\xED."
     playerChoices:
-    - choiceText: Aha, tak jo.
+    - choiceText: "Dob\u0159e."
       nextLineIndex: -1
       startsQuest: 1
       checkForItem: 0
-  questDialogue: []
+  questDialogue:
+  - speakerName: Bratr Gregorius
+    dialogueText: "Sly\u0161\xED\u0161 ty hlasy? To jsou du\u0161e uv\u011Bzn\u011Bn\xE9
+      v t\xE9to kletb\u011B. Pokud chce\u0161 pochopit pravdu, najdi je a pomoz jim
+      naj\xEDt klid. Jen tak m\u016F\u017Eeme zlo ukon\u010Dit."
+    playerChoices:
+    - choiceText: "Dob\u0159e, rozum\xEDm!"
+      nextLineIndex: -1
+      startsQuest: 0
+      checkForItem: 0
   completedDialogue: []

@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 6676986180901761606}
   - component: {fileID: -2172469536438976496}
   - component: {fileID: 3147696516822472727}
-  - component: {fileID: 551125640466613754}
   - component: {fileID: 4220979336489453800}
   m_Layer: 0
   m_Name: NPC 3
@@ -191,17 +190,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eaabb5634b4a7c418e3876dd1645036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcName: Princ
+  npcName: Lucius
   assignedQuest:
-    questName: Najdi diamant
-    questDescription: najdi diamant
+    questName: "Ztracen\xE9 bohatstv\xED"
+    questDescription: "Najdi m\u011B\u0161ec!"
     isCompleted: 0
-    requiredItemName: Diamant
+    requiredItemName: "M\u011B\u0161ec"
     questGiver: {fileID: 5964212993374134985}
   defaultDialogue:
-  - speakerName: Princ
-    dialogueText: "Zdrav\xEDm, ztratil jsem to n\u011Bkde diamant. Pom\u016F\u017Ee\u0161
-      mi ho naj\xEDt?"
+  - speakerName: Lucius
+    dialogueText: "M\xE9 zlato zmizelo\u2026 Co je duch bez sv\xFDch poklad\u016F?
+      Pokud mi je vr\xE1t\xED\u0161, odvd\u011B\u010D\xEDm se."
     playerChoices:
     - choiceText: "Ano, pom\u016F\u017Eu ti."
       nextLineIndex: -1
@@ -212,44 +211,27 @@ MonoBehaviour:
       startsQuest: 0
       checkForItem: 0
   questDialogue:
-  - speakerName: Princ
-    dialogueText: "U\u017E m\xE1\u0161 m\u016Fj diamant?"
+  - speakerName: Lucius
+    dialogueText: "Najde\u0161 m\u016Fj ztracen\xFD m\u011B\u0161ec? Je v n\u011Bm
+      n\u011Bco v\xEDc ne\u017E jen zlato\u2026 je to kl\xED\u010D k m\xFDm vzpom\xEDnk\xE1m."
     playerChoices:
-    - choiceText: Ano
+    - choiceText: Tady je.
       nextLineIndex: -1
       startsQuest: 0
       checkForItem: 1
-    - choiceText: Ne
+    - choiceText: "Dob\u0159e."
       nextLineIndex: -1
       startsQuest: 0
       checkForItem: 0
   completedDialogue:
-  - speakerName: Princ
-    dialogueText: "Moc ti d\u011Bkuji za pomoc!"
+  - speakerName: Lucius
+    dialogueText: "M\xE9 bohatstv\xED je zp\u011Bt\u2026 A za to ti d\xE1m \u010D\xE1st
+      pravdy."
     playerChoices:
-    - choiceText: "Nen\xED za\u010D"
+    - choiceText: "D\xEDky a nen\xED za\u010D!"
       nextLineIndex: -1
       startsQuest: 0
       checkForItem: 0
---- !u!114 &551125640466613754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5964212993374134985}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b19a2a9c5d7cac45a2e135aa7f689f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  quest:
-    questName: Najdi diamant
-    questDescription: najdi diamant
-    isCompleted: 0
-    requiredItemName: Diamant
-    questGiver: {fileID: 0}
-  hintReward: 
 --- !u!114 &4220979336489453800
 MonoBehaviour:
   m_ObjectHideFlags: 0

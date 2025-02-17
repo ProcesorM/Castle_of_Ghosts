@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 6676986180901761606}
   - component: {fileID: -2172469536438976496}
   - component: {fileID: 3147696516822472727}
-  - component: {fileID: 551125640466613754}
   - component: {fileID: 4220979336489453800}
   m_Layer: 0
   m_Name: NPC 2
@@ -191,17 +190,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eaabb5634b4a7c418e3876dd1645036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcName: Princ
+  npcName: Marcus
   assignedQuest:
-    questName: Najdi diamant
-    questDescription: najdi diamant
+    questName: Kosti minulosti
+    questDescription: Najdi kosti minulosti.
     isCompleted: 0
-    requiredItemName: Diamant
+    requiredItemName: Kost
     questGiver: {fileID: 5964212993374134985}
   defaultDialogue:
-  - speakerName: Princ
-    dialogueText: "Zdrav\xEDm, ztratil jsem to n\u011Bkde diamant. Pom\u016F\u017Ee\u0161
-      mi ho naj\xEDt?"
+  - speakerName: Marcus
+    dialogueText: "M\xE9 t\u011Blo shnilo, ale m\xE9 kosti st\xE1le \u010Dekaj\xED
+      na spo\u010Dinut\xED v posv\xE1tn\xE9 zemi\u2026 Pom\u016F\u017Ee\u0161 mi?"
     playerChoices:
     - choiceText: "Ano, pom\u016F\u017Eu ti."
       nextLineIndex: -1
@@ -212,44 +211,26 @@ MonoBehaviour:
       startsQuest: 0
       checkForItem: 0
   questDialogue:
-  - speakerName: Princ
-    dialogueText: "U\u017E m\xE1\u0161 m\u016Fj diamant?"
+  - speakerName: Marcus
+    dialogueText: "Pokud nalezne\u0161 kost m\xE9ho t\u011Bla a p\u0159inese\u0161
+      mi ji, mohu kone\u010Dn\u011B odej\xEDt v pokoji."
     playerChoices:
-    - choiceText: Ano
+    - choiceText: Tady je.
       nextLineIndex: -1
       startsQuest: 0
       checkForItem: 1
-    - choiceText: Ne
+    - choiceText: "Dob\u0159e."
       nextLineIndex: -1
       startsQuest: 0
       checkForItem: 0
   completedDialogue:
-  - speakerName: Princ
-    dialogueText: "Moc ti d\u011Bkuji za pomoc!"
+  - speakerName: Marcus
+    dialogueText: "D\u011Bkuji, poutn\xEDku. M\xE9 srdce je voln\xE9\u2026"
     playerChoices:
-    - choiceText: "Nen\xED za\u010D"
+    - choiceText: "D\xEDky a nen\xED za\u010D!"
       nextLineIndex: -1
       startsQuest: 0
       checkForItem: 0
---- !u!114 &551125640466613754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5964212993374134985}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b19a2a9c5d7cac45a2e135aa7f689f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  quest:
-    questName: Najdi diamant
-    questDescription: najdi diamant
-    isCompleted: 0
-    requiredItemName: Diamant
-    questGiver: {fileID: 0}
-  hintReward: 
 --- !u!114 &4220979336489453800
 MonoBehaviour:
   m_ObjectHideFlags: 0

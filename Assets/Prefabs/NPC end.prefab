@@ -177,7 +177,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endDialogue:
   - speakerName: "\u010Carod\u011Bj"
-    dialogueText: "Do\u0161el jsi na konec hry!"
+    dialogueText: "Tak\u017Ee jsi m\u011B kone\u010Dn\u011B na\u0161el\u2026"
+    playerChoices:
+    - choiceText: "D\xE1l"
+      nextLineIndex: 1
+      startsQuest: 0
+      checkForItem: 0
+  - speakerName: "\u010Carod\u011Bj"
+    dialogueText: "Tak\u017Ee jsi m\u011B kone\u010Dn\u011B na\u0161el\u2026Hledal
+      jsi odpov\u011Bdi, ale nepolo\u017Eil jsi spr\xE1vnou ot\xE1zku. Jsi tady,
+      proto\u017Ee jsi cht\u011Bl v\u011Bd\u011Bt pravdu, ale pravda t\u011B pohlt\xED
+      stejn\u011B jako v\u0161echny p\u0159ede\u0161l\xE9."
+    playerChoices:
+    - choiceText: "D\xE1l"
+      nextLineIndex: 2
+      startsQuest: 0
+      checkForItem: 0
+  - speakerName: "\u010Carod\u011Bj"
+    dialogueText: "J\xE1 jsem tento hrad. Jsem jeho kosti, jeho krev, jeho temnota.
+      A te\u010F\u2026 jsi jeho sou\u010D\xE1st\xED i ty."
     playerChoices:
     - choiceText: "Ukon\u010Dit hru"
       nextLineIndex: -1

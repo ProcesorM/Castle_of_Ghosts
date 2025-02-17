@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5964212993374134985
+--- !u!1 &3095878740123925301
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2347907009723952074}
-  - component: {fileID: 3107712471980108864}
-  - component: {fileID: 7091226810827514439}
-  - component: {fileID: 4496769028144405535}
-  - component: {fileID: 1235351936577267332}
+  - component: {fileID: 1384405572565959709}
+  - component: {fileID: 1557670239659129281}
+  - component: {fileID: 2318885891905868570}
+  - component: {fileID: 1679547560113394581}
   m_Layer: 0
-  m_Name: Hint
-  m_TagString: Hint
+  m_Name: "Elix\xEDr"
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2347907009723952074
+--- !u!4 &1384405572565959709
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5964212993374134985}
+  m_GameObject: {fileID: 3095878740123925301}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1279.2444, y: 432.22296, z: 0}
+  m_LocalPosition: {x: 459.31213, y: 255.30374, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &3107712471980108864
+--- !u!212 &1557670239659129281
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5964212993374134985}
+  m_GameObject: {fileID: 3095878740123925301}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -79,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -5905269101505925195, guid: 5319f7bad288aee4c875be7acacff946, type: 3}
+  m_Sprite: {fileID: -7977072487796266747, guid: 8c40a5304edd58845bd624c2d519f1ec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -90,13 +89,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &7091226810827514439
+--- !u!114 &2318885891905868570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3095878740123925301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17584f52e85fcd14cbcee60a944e172b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: "Elix\xEDr"
+--- !u!61 &1679547560113394581
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5964212993374134985}
+  m_GameObject: {fileID: 3095878740123925301}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -124,40 +136,15 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0010839552, y: -0.0016174354}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.17, y: 0.22}
+    oldSize: {x: 0.18, y: 0.19}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.20420533, y: 0.21544802}
   m_EdgeRadius: 0
---- !u!114 &4496769028144405535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5964212993374134985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17584f52e85fcd14cbcee60a944e172b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: Hint
---- !u!114 &1235351936577267332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5964212993374134985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8b359843fb8d6c4e848924bd2ec5003, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -62,8 +62,7 @@ public class RoomGenerator : MonoBehaviour
 
         GenerateHints();
         GenerateNPCPaths();
-        SpawnNPCs();
-        
+        SpawnNPCs();        
     }
     public string GetNextHint()
     {

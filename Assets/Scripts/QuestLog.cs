@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class QuestLog : MonoBehaviour
@@ -37,12 +38,14 @@ public class QuestLog : MonoBehaviour
             return;
         }
 
-        questLogText.text = "Aktivní úkoly:\n";
+        questLogText.text = "📜 **Aktivní úkoly:**\n";
         foreach (Quest quest in questManager.activeQuests)
         {
-            questLogText.text += "- " + quest.questName + "\n";
+            questLogText.text += $"{quest.questName}\n";
+            questLogText.text += $"-{quest.questDescription}\n\n"; // Přidá popis úkolu pod název
         }
     }
+
 
 
     private void OnDestroy()

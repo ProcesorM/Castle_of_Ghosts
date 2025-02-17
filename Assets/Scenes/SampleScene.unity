@@ -473,10 +473,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 397943214}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 397943219}
+        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+        m_MethodName: ToggleInventoryUI
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3040,25 +3040,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomPrefabs:
   - {fileID: 6656624603425028460, guid: 45db36b6f9baf1a4c952706eb0de56bf, type: 3}
-  - {fileID: 6656624603425028460, guid: 55d0bb2428208254ba37cef32ee49669, type: 3}
-  - {fileID: 6656624603425028460, guid: 5a01f98b52bfd594790273c91f141005, type: 3}
-  - {fileID: 6656624603425028460, guid: 1d75a196dfad9ac4b95bf6676fa0f71f, type: 3}
-  - {fileID: 6656624603425028460, guid: a3b93e86403fba642a764fee68944591, type: 3}
-  - {fileID: 6656624603425028460, guid: 659cf1cfcc302814f90de64d53ca9712, type: 3}
-  - {fileID: 6656624603425028460, guid: 074bd6068452d1a4081b3181dbeba39b, type: 3}
-  - {fileID: 6656624603425028460, guid: 7750bb7e86b8acd47a0bc5327d265d7c, type: 3}
-  - {fileID: 6656624603425028460, guid: 28fd3d0a2f1161d4080aa538c381ba56, type: 3}
-  - {fileID: 6656624603425028460, guid: d0701fd0fd3551242a00b16f04175fae, type: 3}
-  - {fileID: 6656624603425028460, guid: f8a5849605ed92140bcc4b4b3f9f93ac, type: 3}
-  - {fileID: 6656624603425028460, guid: 25184c165e9193e4b96d003fa35665ad, type: 3}
-  - {fileID: 6656624603425028460, guid: d6693e8c6946b4c4d9420e736846c193, type: 3}
-  - {fileID: 6656624603425028460, guid: 9a09c5f5eecb5644d989587f6a4ec7fc, type: 3}
-  - {fileID: 6656624603425028460, guid: b18e4a63a54e4b846aafa3a8407b8ae9, type: 3}
-  - {fileID: 6656624603425028460, guid: 95f6cf194810b374596790b4dd801ac5, type: 3}
-  - {fileID: 6656624603425028460, guid: 948cc5abf1b4ecf46981a1cbf8c20ffe, type: 3}
-  - {fileID: 6656624603425028460, guid: b38f66e2fbb02ce429c208945ffe800d, type: 3}
-  - {fileID: 6656624603425028460, guid: 08528b54e6525744a95436c87cde9adb, type: 3}
-  - {fileID: 6656624603425028460, guid: 5878b3392b39c5d48806d088ce07dc0f, type: 3}
+  - {fileID: 6656624603425028460, guid: 9f2cce60883ed6e418653d37272b98a1, type: 3}
+  - {fileID: 6656624603425028460, guid: 0c45265cf6fe97d47b9f1c34e70d0e33, type: 3}
+  - {fileID: 6656624603425028460, guid: bedf0edd47da7bf4cb3f865fd245e441, type: 3}
+  - {fileID: 6656624603425028460, guid: 01c642e3ba355e7439d03fbb9482c94e, type: 3}
+  - {fileID: 6656624603425028460, guid: 8d4d7430fef65154bb5a5868a1b971e5, type: 3}
+  - {fileID: 6656624603425028460, guid: 14ebd62d975af3745842781a5269100c, type: 3}
+  - {fileID: 6656624603425028460, guid: cafd118898c3f234696363169c312eb1, type: 3}
+  - {fileID: 6656624603425028460, guid: ec0dbab2be9186a438197c5a44709517, type: 3}
+  - {fileID: 6656624603425028460, guid: 6ea695fa8b0520d4595de8a00886d52b, type: 3}
+  - {fileID: 6656624603425028460, guid: 3235ec6d299fab44cb872c1bd706299a, type: 3}
+  - {fileID: 6656624603425028460, guid: 8d169a9c5956ed14bac29110c30ae4e2, type: 3}
+  - {fileID: 6656624603425028460, guid: 9ff701fcac7aed249b46dc397025b16c, type: 3}
+  - {fileID: 6656624603425028460, guid: 94f70b87976c86f4aa9a46aa537d4a85, type: 3}
+  - {fileID: 6656624603425028460, guid: 2e50ffcf250013a40b258545975962f1, type: 3}
+  - {fileID: 6656624603425028460, guid: 73c4d1e0084a32547b5ecd431fcdd6f0, type: 3}
+  - {fileID: 6656624603425028460, guid: 6362597fa01514b4a9cbf42a40e02ad0, type: 3}
+  - {fileID: 6656624603425028460, guid: d990c8dc2ca9ae6499d3642b69eb723f, type: 3}
+  - {fileID: 6656624603425028460, guid: 9afe31ea01a86574fb122203f6958e8f, type: 3}
+  - {fileID: 6656624603425028460, guid: dcc5ae4b155c26146bbff8b0ada3fd69, type: 3}
   gridWidth: 5
   gridHeight: 4
   horizontalDoorPrefab: {fileID: 8681026504455289407, guid: b0dbe97940ee84343a2470eff0f2eaf3, type: 3}

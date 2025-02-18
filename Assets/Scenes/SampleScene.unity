@@ -3061,8 +3061,8 @@ MonoBehaviour:
   - {fileID: 6656624603425028460, guid: dcc5ae4b155c26146bbff8b0ada3fd69, type: 3}
   gridWidth: 5
   gridHeight: 4
-  horizontalDoorPrefab: {fileID: 8681026504455289407, guid: b0dbe97940ee84343a2470eff0f2eaf3, type: 3}
-  verticalDoorPrefab: {fileID: 8749196064784912764, guid: 80c1dee8794837c469ebe2e65b1d3743, type: 3}
+  horizontalDoorPrefab: {fileID: 8681026504455289407, guid: ac53ac59e0c8b6c4e99c1a904b2dd5b5, type: 3}
+  verticalDoorPrefab: {fileID: 8749196064784912764, guid: a1ac0cfb9d9fb9b4c945b70add11ad2f, type: 3}
   playerPrefab: {fileID: 9168842252541027839}
   keyPrefab: {fileID: 14207705696849176, guid: b7da0f3694d00bc4da4988ac7ab8b355, type: 3}
   roomSpacingX: 170
@@ -3078,6 +3078,12 @@ MonoBehaviour:
   - {fileID: 5964212993374134985, guid: 8ba569b81c253a643825b2ff73af0b48, type: 3}
   numberOfNPCs: 4
   endNpcPrefab: {fileID: 5964212993374134985, guid: 0a087659aadc77e47b80b0aea50a0def, type: 3}
+  horizontalLockedDoorPrefab: {fileID: 8749196064784912764, guid: 80c1dee8794837c469ebe2e65b1d3743, type: 3}
+  verticalLockedDoorPrefab: {fileID: 8681026504455289407, guid: b0dbe97940ee84343a2470eff0f2eaf3, type: 3}
+  horizontalPasswordDoorPrefab: {fileID: 8749196064784912764, guid: 65a62c917e898d24d8da0332fd0fb77e, type: 3}
+  verticalPasswordDoorPrefab: {fileID: 8681026504455289407, guid: 9ca198cd2b41d9a49aeb7a7e7cda676c, type: 3}
+  horizontalOpenDoorPrefab: {fileID: 8681026504455289407, guid: ac53ac59e0c8b6c4e99c1a904b2dd5b5, type: 3}
+  verticalOpenDoorPrefab: {fileID: 8749196064784912764, guid: a1ac0cfb9d9fb9b4c945b70add11ad2f, type: 3}
 --- !u!1001 &1306465031423010810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3165,6 +3171,10 @@ PrefabInstance:
     - target: {fileID: 1114336105685053053, guid: d782cfa3912e00240b4f17f324df2856, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114336105685053053, guid: d782cfa3912e00240b4f17f324df2856, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1114336105685053053, guid: d782cfa3912e00240b4f17f324df2856, type: 3}
       propertyPath: m_WasSpriteAssigned

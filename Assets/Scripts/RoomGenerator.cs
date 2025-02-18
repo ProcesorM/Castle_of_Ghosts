@@ -20,7 +20,7 @@ public class RoomGenerator : MonoBehaviour
     private GameObject keyObject;
     private List<GameObject> availableRoomPrefabs;
     private bool hasKey = false;
-    private List<Door> lockedDoors = new List<Door>();
+    public List<Door> lockedDoors = new List<Door>();
 
     public GameObject passwordPanel; // Prefab pro UI panel pro zadání hesla
     private Vector2Int passwordLockedRoomPosition;
@@ -44,6 +44,16 @@ public class RoomGenerator : MonoBehaviour
 
     private Queue<string> hintQueue = new Queue<string>();
 
+    public GameObject horizontalLockedDoorPrefab; // Zamčené dveře na klíč (horizontální)
+    public GameObject verticalLockedDoorPrefab;   // Zamčené dveře na klíč (vertikální)
+
+    public GameObject horizontalPasswordDoorPrefab; // Zamčené dveře na heslo (horizontální)
+    public GameObject verticalPasswordDoorPrefab;   // Zamčené dveře na heslo (vertikální)
+
+    public GameObject horizontalOpenDoorPrefab; // Odemčené dveře (chodba)
+    public GameObject verticalOpenDoorPrefab;   // Odemčené dveře (chodba)
+
+
     void Start()
     {
         availableRoomPrefabs = new List<GameObject>(roomPrefabs); // Vytvoří kopii seznamu prefabů
@@ -62,7 +72,7 @@ public class RoomGenerator : MonoBehaviour
 
         GenerateHints();
         GenerateNPCPaths();
-        SpawnNPCs();        
+        SpawnNPCs();
     }
     public string GetNextHint()
     {
@@ -257,17 +267,39 @@ public class RoomGenerator : MonoBehaviour
         // Najdi dveře v této místnosti a zamkni je heslem
         foreach (Door door in lockedRoom.doors)
         {
-            door.LockWithPassword();
+            bool isHorizontal = Mathf.Abs(door.transform.localScale.x) > Mathf.Abs(door.transform.localScale.y);
 
-            // Přidej blokující Collider
-            BoxCollider2D blockingCollider = door.gameObject.AddComponent<BoxCollider2D>();
-            blockingCollider.isTrigger = false; // Tento collider blokuje průchod
-            blockingCollider.size = new Vector2(0.8f, 0.8f); // Zmenšená velikost
+            // Vybereme správný prefab pro dveře na heslo
+            GameObject passwordDoorPrefab = isHorizontal ? horizontalPasswordDoorPrefab : verticalPasswordDoorPrefab;
 
-            // Ulož referenci na blokující collider
-            door.SetBlockingCollider(blockingCollider);
+            if (passwordDoorPrefab != null)
+            {
+                GameObject passwordDoor = Instantiate(passwordDoorPrefab, door.transform.position, Quaternion.identity);
+                Door passwordDoorComponent = passwordDoor.GetComponent<Door>();
+
+                if (passwordDoorComponent != null)
+                {
+                    passwordDoorComponent.connectedDoor = door.connectedDoor;
+                    passwordDoorComponent.SetRoomGenerator(this);
+                    passwordDoorComponent.SetConnectedRoomPosition(door.connectedRoomPosition);
+                    passwordDoorComponent.LockWithPassword();
+
+                    // Přidáme blokující Collider na nové dveře
+                    BoxCollider2D blockingCollider = passwordDoor.AddComponent<BoxCollider2D>();
+                    blockingCollider.isTrigger = false; // Tento collider blokuje průchod
+                    blockingCollider.size = new Vector2(0.8f, 0.8f); // Zmenšená velikost
+                    passwordDoorComponent.SetBlockingCollider(blockingCollider);
+                }
+
+                Destroy(door.gameObject); // Odstraníme staré dveře
+            }
+            else
+            {
+                Debug.LogError("Prefab pro dveře na heslo není přiřazen!");
+            }
         }
 
+        // Spawn EndNPC v zamčené místnosti
         if (endNpcPrefab != null)
         {
             Vector2 spawnPosition = new Vector2(passwordLockedRoomPosition.x * roomSpacingX, passwordLockedRoomPosition.y * roomSpacingY);
@@ -290,8 +322,8 @@ public class RoomGenerator : MonoBehaviour
         {
             Debug.LogError("EndNPC Prefab není přiřazen v RoomGenerator!");
         }
-
     }
+
 
 
     void GenerateDungeonLayout()
@@ -455,7 +487,6 @@ public class RoomGenerator : MonoBehaviour
 
     void LockRandomRoom()
     {
-        // Náhodně vyber místnost, která bude uzamčena (kromě startovní místnosti)
         Vector2Int randomPosition;
         do
         {
@@ -466,13 +497,32 @@ public class RoomGenerator : MonoBehaviour
         Room lockedRoom = roomGrid[lockedRoomPosition.x, lockedRoomPosition.y];
         lockedRoom.LockRoom();
 
-        // Debug hlášky pro ověření zamčení
         foreach (Door door in lockedRoom.doors)
         {
-            lockedDoors.Add(door);
-            door.LockDoor();
+            bool isHorizontal = Mathf.Abs(door.transform.localScale.x) > Mathf.Abs(door.transform.localScale.y);
+
+            // Vybereme správný prefab podle směru dveří
+            GameObject lockedDoorPrefab = isHorizontal ? horizontalLockedDoorPrefab : verticalLockedDoorPrefab;
+
+            // Zaměníme dveře za uzamčené dveře
+            if (lockedDoorPrefab != null)
+            {
+                GameObject lockedDoor = Instantiate(lockedDoorPrefab, door.transform.position, Quaternion.identity);
+                Door lockedDoorComponent = lockedDoor.GetComponent<Door>();
+
+                if (lockedDoorComponent != null)
+                {
+                    lockedDoorComponent.connectedDoor = door.connectedDoor;
+                    lockedDoorComponent.SetRoomGenerator(this);
+                    lockedDoorComponent.SetConnectedRoomPosition(door.connectedRoomPosition);
+                    lockedDoorComponent.LockDoor();
+                }
+
+                Destroy(door.gameObject); // Odstraníme staré dveře
+            }
         }
     }
+
 
     void PlaceKeyInAccessibleRoom()
     {
@@ -518,6 +568,7 @@ public class RoomGenerator : MonoBehaviour
         UnlockLockedDoors();
     }
 
+
     public bool HasKey()
     {
         return hasKey;
@@ -525,10 +576,33 @@ public class RoomGenerator : MonoBehaviour
 
     void UnlockLockedDoors()
     {
-        foreach (Door door in lockedDoors)
+        List<Door> doorsToUnlock = new List<Door>(lockedDoors); // Vytvoříme kopii seznamu
+
+        foreach (Door door in doorsToUnlock)
         {
-            door.UnlockDoor();
+            if (door != null) // Zkontrolujeme, zda dveře stále existují
+            {
+                door.UnlockDoor(); // Odemkne dveře
+
+                // Vyber správný prefab podle orientace dveří
+                GameObject unlockedDoorPrefab = (Mathf.Abs(door.transform.localScale.x) < Mathf.Abs(door.transform.localScale.y))
+                    ? horizontalOpenDoorPrefab
+                    : verticalOpenDoorPrefab;
+
+                if (unlockedDoorPrefab != null)
+                {
+                    Vector3 doorPosition = door.transform.position;
+                    GameObject newDoor = Instantiate(unlockedDoorPrefab, doorPosition, Quaternion.identity);
+                    Destroy(door.gameObject); // Smaže původní zamčené dveře
+                }
+                else
+                {
+                    Debug.LogError("Prefab pro odemčené dveře není přiřazen!");
+                }
+            }
         }
-        lockedDoors.Clear();
+        lockedDoors.Clear(); // Vyčistí seznam zamčených dveří
     }
+
+
 }

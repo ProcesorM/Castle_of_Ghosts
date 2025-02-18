@@ -60,15 +60,27 @@ public class Door : MonoBehaviour
     public void LockDoor()
     {
         isLocked = true;
-        GetComponent<BoxCollider2D>().isTrigger = false; // Dveře jsou zamčené, nelze jimi projít
-        GetComponent<SpriteRenderer>().color = Color.yellow; // Nastaví barvu dveří na žlutou (stejně jako klíč)
+        GetComponent<BoxCollider2D>().isTrigger = false;
+        GetComponent<SpriteRenderer>().color = Color.yellow;
+
+        if (!roomGenerator.lockedDoors.Contains(this))
+        {
+            roomGenerator.lockedDoors.Add(this);
+        }
     }
 
     public void UnlockDoor()
     {
+        if (this == null || gameObject == null)
+        {
+            Debug.LogWarning("Pokus o odemčení dveří, které už neexistují!");
+            return;
+        }
+
         isLocked = false;
         isPasswordLocked = false;
-        GetComponent<BoxCollider2D>().isTrigger = true; // Dveře jsou odemčené, lze jimi projít
+        GetComponent<BoxCollider2D>().isTrigger = true;
+
         if (blockingCollider != null)
         {
             Destroy(blockingCollider);
@@ -76,6 +88,8 @@ public class Door : MonoBehaviour
         }
         Debug.Log("Dveře odemčeny: " + gameObject.name);
     }
+
+
 
     public void SetRoomGenerator(RoomGenerator generator)
     {

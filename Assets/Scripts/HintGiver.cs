@@ -4,7 +4,7 @@ public class HintGiver : MonoBehaviour
 {
     private bool questCompleted = false;
     public string hintText;
-    public GameObject hintItemPrefab; // Prefab předmětu nápovědy
+    public GameObject hintItemPrefab;
     private bool hintDropped = false;
     private bool hintGiven = false;
 
@@ -16,19 +16,19 @@ public class HintGiver : MonoBehaviour
     public void CompleteQuest()
     {
         questCompleted = true;
-        GiveHint(hintText); // Zavolá metodu, aby se nápověda spawnula
+        GiveHint(hintText);
     }
+
     public void GiveHint(string hintText)
     {
         if (!hintGiven)
         {
             hintGiven = true;
 
-            // Spawn hintu jako fyzického objektu
-            Vector2 spawnPosition = new Vector2(transform.position.x + 2, transform.position.y); // Posun vedle NPC
+            Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y);
             GameObject hintItem = Instantiate(hintItemPrefab, spawnPosition, Quaternion.identity);
 
-            // Nastav text nápovědy
+            // Nastavení textu nápovědy
             Hint hintComponent = hintItem.GetComponent<Hint>();
             if (hintComponent != null)
             {
@@ -37,7 +37,19 @@ public class HintGiver : MonoBehaviour
             }
             else
             {
-                Debug.LogError("HintItem prefab nemá komponentu HintItem!");
+                Debug.LogError("Prefab hintItem nemá komponentu Hint!");
+            }
+
+            // Ověř a nastav sprite (volitelně, pokud chybí)
+            SpriteRenderer renderer = hintItem.GetComponent<SpriteRenderer>();
+            if (renderer == null)
+            {
+                renderer = hintItem.AddComponent<SpriteRenderer>();
+            }
+
+            if (renderer.sprite == null)
+            {
+                Debug.LogWarning("HintItem prefab nemá nastavený sprite! Nastav jej v editoru.");
             }
         }
     }

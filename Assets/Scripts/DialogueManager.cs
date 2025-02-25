@@ -20,6 +20,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject secondaryPanel; // Druhý panel, který chceme zobrazit
 
     private System.Action onDialogueEndCallback;
+    private int lastChoiceIndex = 0;  // Ukládá poslední volbu hráče
 
     void Start()
     {
@@ -57,7 +58,6 @@ public class DialogueManager : MonoBehaviour
         DisplayNextLine();
     }
 
-
     void DisplayNextLine()
     {
         if (currentLineIndex < dialogueLines.Count)
@@ -66,7 +66,6 @@ public class DialogueManager : MonoBehaviour
             speakerNameText.text = line.speakerName;
             dialogueText.text = line.dialogueText;
 
-            // Zobrazí volby hráče, pokud jsou přítomny
             if (line.playerChoices.Count > 0)
             {
                 DisplayChoices(line.playerChoices);
@@ -104,7 +103,7 @@ public class DialogueManager : MonoBehaviour
 
     void MakeChoice(PlayerChoice choice)
     {
-        NPC npcComponent = currentNPC.GetComponent<NPC>();
+        NPC npcComponent = currentNPC?.GetComponent<NPC>();
 
         if (choice.startsQuest)
         {
@@ -116,7 +115,6 @@ public class DialogueManager : MonoBehaviour
             Inventory inventory = FindObjectOfType<Player>().GetComponent<Inventory>();
             if (inventory.HasItem(npcComponent.assignedQuest.requiredItemName))
             {
-                // Předmět je v inventáři
                 inventory.RemoveItemByName(npcComponent.assignedQuest.requiredItemName);
                 npcComponent.assignedQuest.isCompleted = true;
                 FindObjectOfType<QuestManager>().CompleteQuest(npcComponent.assignedQuest);
@@ -124,17 +122,16 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
-                // Předmět není v inventáři
-                Debug.Log("Hráč nemá požadovaný předmět.");
                 dialogueText.text = "Nemáš požadovaný předmět.";
             }
         }
+
+        lastChoiceIndex = choice.nextLineIndex;
 
         if (choice.nextLineIndex == -1)
         {
             if (currentNPC != null && currentNPC.GetComponent<EndNPC>() != null)
             {
-                Debug.Log("EndNPC detekován, hra se ukončuje...");
                 currentNPC.GetComponent<EndNPC>().EndGame();
             }
             else
@@ -148,9 +145,6 @@ public class DialogueManager : MonoBehaviour
             DisplayNextLine();
         }
     }
-
-
-
 
     IEnumerator EndDialogueAfterDelay(float delay)
     {
@@ -168,10 +162,16 @@ public class DialogueManager : MonoBehaviour
         {
             currentNPC.ResumeMovement();
         }
+
         currentNPC = null;
-        // Zavolání callback funkce po ukončení dialogu
+
         onDialogueEndCallback?.Invoke();
-        onDialogueEndCallback = null; // Vyčistit po použití
+        onDialogueEndCallback = null;
+    }
+
+    public int LastChoiceIndex()
+    {
+        return lastChoiceIndex;
     }
     public void DisplayDynamicResponse(string npcName, string responseText)
     {
@@ -188,6 +188,5 @@ public class DialogueManager : MonoBehaviour
         // Automaticky ukončí dialog po 2 sekundách
         StartCoroutine(EndDialogueAfterDelay(2f));
     }
-
-
 }
+

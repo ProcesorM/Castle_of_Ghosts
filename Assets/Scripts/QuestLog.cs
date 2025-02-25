@@ -1,5 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class QuestLog : MonoBehaviour
@@ -20,6 +19,7 @@ public class QuestLog : MonoBehaviour
 
         UpdateQuestLog(); // Aktualizace při spuštění
     }
+
     public void ToggleQuestLog()
     {
         bool isActive = questLogPanel.activeSelf;
@@ -38,15 +38,17 @@ public class QuestLog : MonoBehaviour
             return;
         }
 
-        questLogText.text = "📜 **Aktivní úkoly:**\n";
+        // Nastavení stylu nadpisu
+        questLogText.text = "<b><size=25><color=yellow>Questy</color></size></b>\n\n";
+
         foreach (Quest quest in questManager.activeQuests)
         {
-            questLogText.text += $"{quest.questName}\n";
-            questLogText.text += $"-{quest.questDescription}\n\n"; // Přidá popis úkolu pod název
+            // Nastavení stylu názvu questu
+            questLogText.text += $"<b><size=20><color=orange>{quest.questName}</color></size></b>\n";
+            // Nastavení stylu popisu questu
+            questLogText.text += $"<size=18><color=white>- {quest.questDescription}</color></size>\n\n";
         }
     }
-
-
 
     private void OnDestroy()
     {

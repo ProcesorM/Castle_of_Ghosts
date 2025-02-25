@@ -1,13 +1,14 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Hint : MonoBehaviour
 {
-    private string hintText;
+    public string hintText;
     private Color hintColor;
+    public Sprite hintSprite; // Přidej tohle
 
     private void Start()
     {
-        // Ulo� barvu z SpriteRenderer
+        // Ulož barvu z SpriteRenderer
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
@@ -34,8 +35,18 @@ public class Hint : MonoBehaviour
     {
         if (inventory != null)
         {
-            inventory.AddHint(hintText, hintColor);
+            inventory.AddHint(this);
             Destroy(gameObject);
         }
+    }
+
+    public void SetSprite(Sprite sprite)
+    {
+        hintSprite = sprite;
+    }
+
+    public Sprite GetSprite()
+    {
+        return hintSprite;
     }
 }

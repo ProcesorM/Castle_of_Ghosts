@@ -51,7 +51,31 @@ public class NPCMovement : MonoBehaviour
         npcPath = path;
         currentWaypointIndex = 0;
         movingForward = true;
+
+        // **Kontrola, zda `roomGenerator` není null**
+        if (roomGenerator == null)
+        {
+            roomGenerator = FindObjectOfType<RoomGenerator>(); // Pokusíme se ho najít v hierarchii
+            if (roomGenerator == null)
+            {
+                Debug.LogError("roomGenerator je stále null v NPCMovement!");
+                return;
+            }
+        }
+
+        // **Kontrola, zda `npcPath` není null nebo prázdná**
+        if (npcPath == null || npcPath.Count == 0)
+        {
+            Debug.LogError("NPC nemá přidělenou cestu! Spawn proběhl špatně.");
+            return;
+        }
+
+        // 🚀 Oprava: NPC se rovnou přesune na svůj první waypoint
+        Vector3 startPosition = new Vector3(npcPath[0].x * roomGenerator.roomSpacingX, npcPath[0].y * roomGenerator.roomSpacingY, 0);
+        transform.position = startPosition;
     }
+
+
 
     private void MoveToWaypoint()
     {

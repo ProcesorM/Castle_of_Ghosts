@@ -44,51 +44,60 @@ public class Inventory : MonoBehaviour
         inventoryUI.SetActive(!inventoryUI.activeSelf);
     }
 
-    public void AddHint(string hintText, Color hintColor)
+    public void AddHint(Hint hint)
     {
-        // Vytvoření virtuálního objektu pro hint
-        GameObject hintObject = new GameObject($"Hint: {hintText}");
-        Hint hintComponent = hintObject.AddComponent<Hint>();
-        hintComponent.SetHintText(hintText);
+        if (hint == null)
+        {
+            Debug.LogError("Předaný hint je null!");
+            return;
+        }
 
-        // Nastavení barvy (není nutné, pokud není vizuální zobrazení)
-        SpriteRenderer spriteRenderer = hintObject.AddComponent<SpriteRenderer>();
-        spriteRenderer.color = hintColor;
+        // Použij existující objekt, který má již všechny nastavené vlastnosti
+        inventoryItems.Add(hint.gameObject);
+        hints.Add(hint.hintText);
 
-        // Přidání do seznamu inventoryItems
-        inventoryItems.Add(hintObject);
-        hints.Add(hintText);
-        UpdateInventoryUIForHint(hintText, hintColor);
+        // Vytvoř slot v UI inventáři podle skutečného objektu
+        UpdateInventoryUIForHint(hint);
     }
 
 
-    private void UpdateInventoryUIForHint(string hintText, Color hintColor)
+
+    private void UpdateInventoryUIForHint(Hint hint)
     {
         if (slotHolder == null) return;
 
-        // Vytvoř nový slot pro nápovědu
         GameObject newItemSlot = Instantiate(inventorySlotPrefab, slotHolder);
         Image itemIcon = newItemSlot.GetComponentInChildren<Image>();
         Text itemNameText = newItemSlot.GetComponentInChildren<Text>();
 
-        // Nastav barvu ikony
         if (itemIcon != null)
         {
-            itemIcon.color = hintColor;
+            SpriteRenderer spriteRenderer = hint.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                itemIcon.sprite = spriteRenderer.sprite;
+                itemIcon.color = spriteRenderer.color;
+            }
+            else
+            {
+                Debug.LogError("Hint nemá SpriteRenderer!");
+                itemIcon.sprite = null;
+                itemIcon.color = Color.clear;
+            }
         }
 
-        // Nastav název nápovědy
         if (itemNameText != null)
         {
-            itemNameText.text = "Nápověda"; // Název nápovědy ve slotu
+            itemNameText.text = "Nápověda";
         }
 
         Button itemButton = newItemSlot.GetComponentInChildren<Button>();
         if (itemButton != null)
         {
-            itemButton.onClick.AddListener(() => ViewHint(hintText));
+            itemButton.onClick.AddListener(() => ViewHint(hint.hintText));
         }
     }
+
     public void ViewHint(string hintText)
     {
         if (!string.IsNullOrEmpty(hintText))
@@ -239,7 +248,7 @@ public class Inventory : MonoBehaviour
             {
                 // Pokud je to hint, aktualizujeme jako hint
                 Hint hint = item.GetComponent<Hint>();
-                UpdateInventoryUIForHint(hint.GetHintText(), hint.GetHintColor());
+                UpdateInventoryUIForHint(hint);
             }
             else
             {

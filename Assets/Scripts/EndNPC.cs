@@ -35,7 +35,16 @@ public class EndNPC : MonoBehaviour
             return;
         }
 
-        dialogueManager.StartDialogue(endDialogue, null, EndGame);
+        dialogueManager.StartDialogue(endDialogue, null, CheckEndGame);
+    }
+
+    void CheckEndGame()
+    {
+        Debug.Log("Kontroluji, zda se má hra ukončit...");
+        if (dialogueManager.LastChoiceIndex() == -1)
+        {
+            EndGame();
+        }
     }
 
     public void EndGame()
@@ -59,9 +68,4 @@ public class EndNPC : MonoBehaviour
             isPlayerInRange = false;
         }
     }
-    public void SetDialogueManager(DialogueManager manager)
-    {
-        dialogueManager = manager;
-    }
-
 }

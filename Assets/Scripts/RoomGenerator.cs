@@ -73,6 +73,7 @@ public class RoomGenerator : MonoBehaviour
         LockRandomRoom();
 
         PlaceKeyInAccessibleRoom();
+        Debug.Log("Spawning hráče...");
         SpawnPlayer();
 
         int randomIndex = Random.Range(0, puzzles.Count);
@@ -82,6 +83,13 @@ public class RoomGenerator : MonoBehaviour
         GenerateHints();
         GenerateNPCPaths();
         SpawnNPCs();
+        if (playerPrefab == null)
+        {
+            Debug.LogError("Chyba: playerPrefab není přiřazen v RoomGenerator!");
+            return;
+        }
+
+        SpawnStaticNPC();
     }
 
     public string GetNextHint()
@@ -537,17 +545,42 @@ public class RoomGenerator : MonoBehaviour
 
     void SpawnPlayer()
     {
-        // Umístí hráče do první vygenerované místnosti (na pozici [0, 0])
-        if (roomGrid[0, 0] != null)
+        if (FindObjectOfType<Player>() != null)
         {
-            Vector2 playerSpawnPosition = roomGrid[0, 0].transform.position + new Vector3(0, 1, 0);
-            Instantiate(playerPrefab, playerSpawnPosition, Quaternion.identity);
-
-            // Spawn statického NPC v první místnosti
-            Vector2 npcSpawnPosition = roomGrid[0, 0].transform.position + new Vector3(30, 0, 0); // Posun od hráče
-            Instantiate(staticNPCPrefab, npcSpawnPosition, Quaternion.identity);
+            Debug.Log("Hráč už existuje, nespawnujeme nového.");
+            return;
         }
+
+        if (roomGrid[0, 0] == null)
+        {
+            Debug.LogError("Startovní místnost [0,0] ještě neexistuje!");
+            return;
+        }
+
+        Vector2 playerSpawnPosition = roomGrid[0, 0].transform.position + new Vector3(0, 1, 0);
+        Instantiate(playerPrefab, playerSpawnPosition, Quaternion.identity);
+
     }
+    void SpawnStaticNPC()
+    {
+        if (staticNPCPrefab == null)
+        {
+            Debug.LogError("staticNPCPrefab není přiřazen v RoomGenerator!");
+            return;
+        }
+
+        if (roomGrid[0, 0] == null)
+        {
+            Debug.LogError("Startovní místnost [0,0] ještě neexistuje!");
+            return;
+        }
+
+        Vector2 npcSpawnPosition = roomGrid[0, 0].transform.position + new Vector3(30, 0, 0);
+        Instantiate(staticNPCPrefab, npcSpawnPosition, Quaternion.identity);
+    }
+
+
+
 
     public void CollectKey()
     {

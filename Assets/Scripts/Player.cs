@@ -10,9 +10,10 @@ public class Player : MonoBehaviour
     private NPCMovement nearbyNPC; // Odkaz na blízké NPC
 
     private bool canMove = true;
-    private void Awake()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
     }
     void Start()
     {

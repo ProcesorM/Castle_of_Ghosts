@@ -3597,7 +3597,7 @@ MonoBehaviour:
   gridHeight: 4
   horizontalDoorPrefab: {fileID: 8681026504455289407, guid: ac53ac59e0c8b6c4e99c1a904b2dd5b5, type: 3}
   verticalDoorPrefab: {fileID: 8749196064784912764, guid: a1ac0cfb9d9fb9b4c945b70add11ad2f, type: 3}
-  playerPrefab: {fileID: 9168842252541027839}
+  playerPrefab: {fileID: 3359471656874608697, guid: d782cfa3912e00240b4f17f324df2856, type: 3}
   keyPrefab: {fileID: 14207705696849176, guid: b7da0f3694d00bc4da4988ac7ab8b355, type: 3}
   roomSpacingX: 170
   roomSpacingY: 90
@@ -3804,11 +3804,6 @@ PrefabInstance:
       addedObject: {fileID: 519420032}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d782cfa3912e00240b4f17f324df2856, type: 3}
---- !u!1 &9168842252541027839 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3359471656874608697, guid: d782cfa3912e00240b4f17f324df2856, type: 3}
-  m_PrefabInstance: {fileID: 1306465031423010810}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9168842252541027845 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1657560960978796473, guid: d782cfa3912e00240b4f17f324df2856, type: 3}

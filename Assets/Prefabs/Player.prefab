@@ -192,4 +192,4 @@ MonoBehaviour:
   inventoryUI: {fileID: 0}
   slotHolder: {fileID: 0}
   inventorySlotPrefab: {fileID: 0}
-  hintDisplayPanel: {fileID: 0}
+  hintDisplayText: {fileID: 0}

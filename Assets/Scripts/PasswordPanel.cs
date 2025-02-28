@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Globalization;
+using System.Text;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PasswordPanel : MonoBehaviour
@@ -30,7 +32,12 @@ public class PasswordPanel : MonoBehaviour
     public void OnSubmitPassword()
     {
         Debug.Log("Submit tlačítko bylo stisknuto"); // Pro kontrolu, zda metoda běží
-        if (passwordInput.text == correctPassword)
+
+        // Odebrání diakritiky a převedení na malá písmena
+        string inputPassword = RemoveDiacritics(passwordInput.text).ToLower();
+        string correctNormalizedPassword = RemoveDiacritics(correctPassword).ToLower();
+
+        if (inputPassword == correctNormalizedPassword)
         {
             Debug.Log("Správné heslo! Dveře odemčeny.");
             doorToUnlock.UnlockDoor();
@@ -43,6 +50,25 @@ public class PasswordPanel : MonoBehaviour
         {
             Debug.Log("Špatné heslo, zkuste to znovu.");
         }
+    }
+    private string RemoveDiacritics(string text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+            return text;
+
+        string normalizedText = text.Normalize(NormalizationForm.FormD);
+        StringBuilder stringBuilder = new StringBuilder();
+
+        foreach (char c in normalizedText)
+        {
+            UnicodeCategory unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+            if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+            {
+                stringBuilder.Append(c);
+            }
+        }
+
+        return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
     }
 
     public void OnCancel()

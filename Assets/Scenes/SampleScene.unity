@@ -1361,7 +1361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.695, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1426,7 +1426,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.397, g: 0.397, b: 0.397, a: 0}
+  m_BackGroundColor: {r: 0.29799998, g: 0.29799998, b: 0.29799998, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1866,8 +1866,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -57.998, y: -71.3438}
-  m_SizeDelta: {x: 370.68, y: 234.0211}
+  m_AnchoredPosition: {x: -57.998, y: -156.87143}
+  m_SizeDelta: {x: 370.68, y: 405.0763}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &997397293
 MonoBehaviour:
@@ -2060,7 +2060,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Inventory
+  m_Text: "Invent\xE1\u0159"
 --- !u!222 &1021728574
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3163,7 +3163,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quests
+  m_Text: Questy
 --- !u!222 &1960978917
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3574,25 +3574,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomPrefabs:
   - {fileID: 6656624603425028460, guid: 45db36b6f9baf1a4c952706eb0de56bf, type: 3}
-  - {fileID: 6656624603425028460, guid: 9f2cce60883ed6e418653d37272b98a1, type: 3}
-  - {fileID: 6656624603425028460, guid: 0c45265cf6fe97d47b9f1c34e70d0e33, type: 3}
-  - {fileID: 6656624603425028460, guid: bedf0edd47da7bf4cb3f865fd245e441, type: 3}
-  - {fileID: 6656624603425028460, guid: 01c642e3ba355e7439d03fbb9482c94e, type: 3}
-  - {fileID: 6656624603425028460, guid: 8d4d7430fef65154bb5a5868a1b971e5, type: 3}
-  - {fileID: 6656624603425028460, guid: 14ebd62d975af3745842781a5269100c, type: 3}
-  - {fileID: 6656624603425028460, guid: cafd118898c3f234696363169c312eb1, type: 3}
-  - {fileID: 6656624603425028460, guid: ec0dbab2be9186a438197c5a44709517, type: 3}
-  - {fileID: 6656624603425028460, guid: 6ea695fa8b0520d4595de8a00886d52b, type: 3}
-  - {fileID: 6656624603425028460, guid: 3235ec6d299fab44cb872c1bd706299a, type: 3}
-  - {fileID: 6656624603425028460, guid: 8d169a9c5956ed14bac29110c30ae4e2, type: 3}
-  - {fileID: 6656624603425028460, guid: 9ff701fcac7aed249b46dc397025b16c, type: 3}
-  - {fileID: 6656624603425028460, guid: 94f70b87976c86f4aa9a46aa537d4a85, type: 3}
-  - {fileID: 6656624603425028460, guid: 2e50ffcf250013a40b258545975962f1, type: 3}
-  - {fileID: 6656624603425028460, guid: 73c4d1e0084a32547b5ecd431fcdd6f0, type: 3}
-  - {fileID: 6656624603425028460, guid: 6362597fa01514b4a9cbf42a40e02ad0, type: 3}
-  - {fileID: 6656624603425028460, guid: d990c8dc2ca9ae6499d3642b69eb723f, type: 3}
-  - {fileID: 6656624603425028460, guid: 9afe31ea01a86574fb122203f6958e8f, type: 3}
-  - {fileID: 6656624603425028460, guid: dcc5ae4b155c26146bbff8b0ada3fd69, type: 3}
+  - {fileID: 6656624603425028460, guid: 852e1d3f04a31bb4bb8a7f69250650ae, type: 3}
+  - {fileID: 6656624603425028460, guid: 67b023893caa47b49ac91174147d6621, type: 3}
+  - {fileID: 6656624603425028460, guid: e208ef53130a5a44eaa6faf4fd210b45, type: 3}
+  - {fileID: 6656624603425028460, guid: fd5fdc684dac05a47889e4417d20bdbf, type: 3}
+  - {fileID: 6656624603425028460, guid: 3ec8cddc240dfe54caf6b927e4b77047, type: 3}
+  - {fileID: 6656624603425028460, guid: 4d30faffcb65cd24a81d331771fef5c9, type: 3}
+  - {fileID: 6656624603425028460, guid: 34c506f010c36ed49823574435dea99a, type: 3}
+  - {fileID: 6656624603425028460, guid: d8d5fd1329ae9724a93ec2116af8301c, type: 3}
+  - {fileID: 6656624603425028460, guid: 523d55519d5f5fb4aa5280f18a1b782a, type: 3}
+  - {fileID: 6656624603425028460, guid: 6620d2a5105ff9c40adb0aced4ade3be, type: 3}
+  - {fileID: 6656624603425028460, guid: 7a04c99334d714341af52a762d831d89, type: 3}
+  - {fileID: 6656624603425028460, guid: cacf34a7f00934341abbbfd663067a5c, type: 3}
+  - {fileID: 6656624603425028460, guid: 1b718d4783974b947bd42c54c5344cb3, type: 3}
+  - {fileID: 6656624603425028460, guid: af81bd1a4d16fa241859d94dd11e0d63, type: 3}
+  - {fileID: 6656624603425028460, guid: 8acdf7a734d8dac4fbd13eba38a6a1b3, type: 3}
+  - {fileID: 6656624603425028460, guid: 628fdac769051dd4aa2e1759dc62e4b7, type: 3}
+  - {fileID: 6656624603425028460, guid: 51345ccd381ed4f4cac080dd81766011, type: 3}
+  - {fileID: 6656624603425028460, guid: 5992f712904862b4fa68bffc1383653a, type: 3}
+  - {fileID: 6656624603425028460, guid: 5ac145a1f1afee14fb4943372ae305a8, type: 3}
   gridWidth: 5
   gridHeight: 4
   horizontalDoorPrefab: {fileID: 8681026504455289407, guid: ac53ac59e0c8b6c4e99c1a904b2dd5b5, type: 3}
@@ -3726,7 +3726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1114336105685053053, guid: d782cfa3912e00240b4f17f324df2856, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1114336105685053053, guid: d782cfa3912e00240b4f17f324df2856, type: 3}
       propertyPath: m_WasSpriteAssigned

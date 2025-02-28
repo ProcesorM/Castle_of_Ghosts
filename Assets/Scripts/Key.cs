@@ -8,8 +8,8 @@ public class Key : MonoBehaviour
         {
             Debug.Log("Hráč sebral klíč.");
             RoomGenerator roomGenerator = FindObjectOfType<RoomGenerator>();
+            gameObject.SetActive(false);
             roomGenerator.CollectKey();
-            Destroy(gameObject);
         }
     }
 }

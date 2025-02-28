@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -4373088333598493800, guid: 263b141a0b422094494886086a89cae2, type: 3}
   m_Color: {r: 0.40658593, g: 0.691003, b: 0.9169811, a: 1}
   m_FlipX: 0
@@ -205,10 +205,6 @@ MonoBehaviour:
     - choiceText: "Ano, pom\u016F\u017Eu ti."
       nextLineIndex: -1
       startsQuest: 1
-      checkForItem: 0
-    - choiceText: Ne.
-      nextLineIndex: -1
-      startsQuest: 0
       checkForItem: 0
   questDialogue:
   - speakerName: Alaric

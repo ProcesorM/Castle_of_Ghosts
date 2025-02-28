@@ -61,6 +61,15 @@ public class Player : MonoBehaviour
         {
             inventory.ToggleInventoryUI();
         }
+        if (movement.x > 0)
+        {
+            transform.localScale = new Vector3(2, 2, 1); // Otočení doprava (default)
+        }
+        else if (movement.x < 0)
+        {
+            transform.localScale = new Vector3(-2, 2, 1); // Otočení doleva
+        }
+
     }
 
     void FixedUpdate()

@@ -114,7 +114,7 @@ Transform:
   m_GameObject: {fileID: 7066309367298199143}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.58, y: 0, z: 0}
+  m_LocalPosition: {x: -0.57, y: 0, z: 0}
   m_LocalScale: {x: 0.16, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -417,9 +417,6 @@ MonoBehaviour:
   isLocked: 0
   isPasswordLocked: 0
   connectedRoomPosition: {x: 0, y: 0}
-  horizontalHallwayPrefab: {fileID: 8681026504455289407, guid: ac53ac59e0c8b6c4e99c1a904b2dd5b5, type: 3}
-  verticalHallwayPrefab: {fileID: 8749196064784912764}
-  isHorizontal: 1
 --- !u!61 &5802001291682017145
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -493,7 +490,7 @@ Transform:
   m_GameObject: {fileID: 9056842101488380082}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.58, y: 0, z: 0}
+  m_LocalPosition: {x: 0.57, y: 0, z: 0}
   m_LocalScale: {x: 0.16, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

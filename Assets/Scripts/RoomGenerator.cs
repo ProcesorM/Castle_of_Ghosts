@@ -355,77 +355,79 @@ public class RoomGenerator : MonoBehaviour
                     !connectedRooms.Contains(neighborPosition))
                 {
                     Room neighborRoom = roomGrid[neighborPosition.x, neighborPosition.y];
-
-                    // Přidej dveře mezi currentRoom a neighborRoom
                     Door doorComponent = null;
 
-                    if (direction == new Vector2Int(1, 0)) // Right
+                    // Získání velikosti dveří pro lepší umístění
+                    float doorWidth = horizontalDoorPrefab.GetComponent<SpriteRenderer>().bounds.size.x;
+                    float doorHeight = verticalDoorPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
+
+                    if (direction == new Vector2Int(1, 0)) // Right (dveře mezi levou a pravou místností)
                     {
-                        // Přidej dveře vpravo a odstraní příslušné stěny
-                        Vector2 doorPosition = new Vector2(currentRoom.transform.position.x + roomSpacingX / 2, currentRoom.transform.position.y);
+                        Vector2 doorPosition = new Vector2(
+                            (currentRoom.transform.position.x + neighborRoom.transform.position.x) / 2 + 0.4f,
+                            currentRoom.transform.position.y
+                        );
                         GameObject door = Instantiate(horizontalDoorPrefab, doorPosition, Quaternion.identity);
                         doorComponent = door.GetComponent<Door>();
-                        doorComponent.SetRoomGenerator(this);
-                        doorComponent.SetConnectedRoomPosition(neighborPosition);
-
-                        currentRoom.AddDoor(doorComponent);
-                        neighborRoom.AddDoor(doorComponent);
-
-                        // Odstraň pravou stěnu aktuální místnosti a levou stěnu sousední místnosti
-                        currentRoom.RemoveWallSegment("right");
-                        neighborRoom.RemoveWallSegment("left");
                     }
                     else if (direction == new Vector2Int(-1, 0)) // Left
                     {
-                        // Přidej dveře vlevo a odstraní příslušné stěny
-                        Vector2 doorPosition = new Vector2(neighborRoom.transform.position.x + roomSpacingX / 2, neighborRoom.transform.position.y);
+                        Vector2 doorPosition = new Vector2(
+                            (currentRoom.transform.position.x + neighborRoom.transform.position.x) / 2 + 0.4f,
+                            currentRoom.transform.position.y
+                        );
                         GameObject door = Instantiate(horizontalDoorPrefab, doorPosition, Quaternion.identity);
                         doorComponent = door.GetComponent<Door>();
-                        doorComponent.SetRoomGenerator(this);
-                        doorComponent.SetConnectedRoomPosition(currentRoomPosition);
-
-                        currentRoom.AddDoor(doorComponent);
-                        neighborRoom.AddDoor(doorComponent);
-
-                        // Odstraň levou stěnu aktuální místnosti a pravou stěnu sousední místnosti
-                        currentRoom.RemoveWallSegment("left");
-                        neighborRoom.RemoveWallSegment("right");
                     }
-                    else if (direction == new Vector2Int(0, 1)) // Up
+                    else if (direction == new Vector2Int(0, 1)) // Up (dveře mezi horní a dolní místností)
                     {
-                        // Přidej dveře nahoře a odstraní příslušné stěny
-                        Vector2 doorPosition = new Vector2(currentRoom.transform.position.x, currentRoom.transform.position.y + roomSpacingY / 2);
+                        Vector2 doorPosition = new Vector2(
+                            currentRoom.transform.position.x + 0.4f,
+                            (currentRoom.transform.position.y + neighborRoom.transform.position.y) / 2
+                        );
                         GameObject door = Instantiate(verticalDoorPrefab, doorPosition, Quaternion.identity);
                         doorComponent = door.GetComponent<Door>();
-                        doorComponent.SetRoomGenerator(this);
-                        doorComponent.SetConnectedRoomPosition(neighborPosition);
-
-                        currentRoom.AddDoor(doorComponent);
-                        neighborRoom.AddDoor(doorComponent);
-
-                        // Odstraň horní stěnu aktuální místnosti a spodní stěnu sousední místnosti
-                        currentRoom.RemoveWallSegment("top");
-                        neighborRoom.RemoveWallSegment("bottom");
                     }
                     else if (direction == new Vector2Int(0, -1)) // Down
                     {
-                        // Přidej dveře dole a odstraní příslušné stěny
-                        Vector2 doorPosition = new Vector2(neighborRoom.transform.position.x, neighborRoom.transform.position.y + roomSpacingY / 2);
+                        Vector2 doorPosition = new Vector2(
+                            currentRoom.transform.position.x + 0.4f,
+                            (currentRoom.transform.position.y + neighborRoom.transform.position.y) / 2
+                        );
                         GameObject door = Instantiate(verticalDoorPrefab, doorPosition, Quaternion.identity);
                         doorComponent = door.GetComponent<Door>();
-                        doorComponent.SetRoomGenerator(this);
-                        doorComponent.SetConnectedRoomPosition(currentRoomPosition);
-
-                        currentRoom.AddDoor(doorComponent);
-                        neighborRoom.AddDoor(doorComponent);
-
-                        // Odstraň spodní stěnu aktuální místnosti a horní stěnu sousední místnosti
-                        currentRoom.RemoveWallSegment("bottom");
-                        neighborRoom.RemoveWallSegment("top");
                     }
 
                     if (doorComponent != null)
                     {
+                        doorComponent.SetRoomGenerator(this);
+                        doorComponent.SetConnectedRoomPosition(neighborPosition);
+
+                        currentRoom.AddDoor(doorComponent);
+                        neighborRoom.AddDoor(doorComponent);
+
+                        // Správné odstranění stěn mezi propojenými místnostmi
+                        if (direction == new Vector2Int(1, 0)) // Right
+                        {
+                            currentRoom.RemoveWallSegment("right");
+                            neighborRoom.RemoveWallSegment("left");
+                        }
+                        else if (direction == new Vector2Int(-1, 0)) // Left
+                        {
+                            currentRoom.RemoveWallSegment("left");
+                            neighborRoom.RemoveWallSegment("right");
+                        }
+                        else if (direction == new Vector2Int(0, 1)) // Up
+                        {
+                            currentRoom.RemoveWallSegment("top");
+                            neighborRoom.RemoveWallSegment("bottom");
+                        }
+                        else if (direction == new Vector2Int(0, -1)) // Down
+                        {
+                            currentRoom.RemoveWallSegment("bottom");
+                            neighborRoom.RemoveWallSegment("top");
+                        }
+
                         connectedRooms.Add(neighborPosition);
                         roomQueue.Enqueue(neighborPosition);
                     }
@@ -433,6 +435,7 @@ public class RoomGenerator : MonoBehaviour
             }
         }
     }
+
 
     void LockRandomRoom()
     {

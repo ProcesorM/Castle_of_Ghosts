@@ -89,11 +89,15 @@ public class NPCMovement : MonoBehaviour
             Vector2Int targetPosition = npcPath[currentWaypointIndex];
             Vector3 targetWorldPosition = new Vector3(targetPosition.x * roomGenerator.roomSpacingX, targetPosition.y * roomGenerator.roomSpacingY, 0);
             Vector3 direction = (targetWorldPosition - transform.position).normalized;
+            if (direction.x > 0)
+            {
+                transform.localScale = new Vector3(20, 20, 1); // NPC směřuje doprava
+            }
+            else if (direction.x < 0)
+            {
+                transform.localScale = new Vector3(-20, 20, 1); // NPC směřuje doleva
+            }
 
-            // Debugování stavu isMoving
-            //Debug.Log("isMoving: " + isMoving);
-
-            // Pohyb pouze pokud je isMoving true
             if (isMoving)
             {
                 transform.position += direction * speed * Time.deltaTime;

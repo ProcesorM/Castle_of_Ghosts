@@ -15,6 +15,9 @@ public class Inventory : MonoBehaviour
 
     private List<string> hints = new List<string>();
 
+    private Coroutine activeHintCoroutine; // Sleduje běžící Coroutine
+    private string currentDisplayedHint = ""; // Sleduje aktuálně zobrazenou nápovědu
+
     private void Start()
     {
         if (inventoryUI == null)
@@ -52,17 +55,50 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        // Použij existující objekt, který má již všechny nastavené vlastnosti
-        inventoryItems.Add(hint.gameObject);
-        hints.Add(hint.hintText);
+        // Ověříme, jestli už existuje nápověda se stejným textem
+        foreach (GameObject existingHint in inventoryItems)
+        {
+            Hint existingHintComponent = existingHint.GetComponent<Hint>();
+            if (existingHintComponent != null && existingHintComponent.hintText == hint.hintText)
+            {
+                Debug.Log($"Nápověda '{hint.hintText}' už existuje v inventáři.");
+                return; // Nechceme přidávat stejný hint dvakrát
+            }
+        }
 
-        // Vytvoř slot v UI inventáři podle skutečného objektu
-        UpdateInventoryUIForHint(hint);
+        // **Vytvoříme kopii hintu, aby se neztratil originální objekt ve scéně**
+        GameObject newHintObject = Instantiate(hint.gameObject);
+        Hint newHint = newHintObject.GetComponent<Hint>();
+
+        // **Zajistíme, že kopie nemá fyziku a kolize, aby se chovala správně v inventáři**
+        if (newHintObject.GetComponent<Rigidbody2D>())
+        {
+            Destroy(newHintObject.GetComponent<Rigidbody2D>());
+        }
+        if (newHintObject.GetComponent<Collider2D>())
+        {
+            Destroy(newHintObject.GetComponent<Collider2D>());
+        }
+
+        // **Přidáme kopii hintu do inventáře**
+        inventoryItems.Add(newHintObject);
+        hints.Add(newHint.hintText);
+
+        // **Nastavíme unikátní jméno pro UI**
+        string hintName = "Nápověda " + hints.Count;
+        newHintObject.name = hintName;
+
+        // **Aktualizujeme UI**
+        UpdateInventoryUIForHint(newHint, hintName);
+
+        Debug.Log($"Přidána nová nápověda: {newHint.hintText}");
     }
 
 
 
-    private void UpdateInventoryUIForHint(Hint hint)
+
+
+    private void UpdateInventoryUIForHint(Hint hint, string hintName)
     {
         if (slotHolder == null) return;
 
@@ -88,7 +124,7 @@ public class Inventory : MonoBehaviour
 
         if (itemNameText != null)
         {
-            itemNameText.text = "Nápověda";
+            itemNameText.text = hintName;
         }
 
         Button itemButton = newItemSlot.GetComponentInChildren<Button>();
@@ -98,17 +134,33 @@ public class Inventory : MonoBehaviour
         }
     }
 
+
+
+
+
+
+
     public void ViewHint(string hintText)
     {
-        if (!string.IsNullOrEmpty(hintText))
+        // Vždy nastavíme nový text, i když je to stejná nápověda
+        hintDisplayText.text = hintText;
+        hintDisplayText.gameObject.SetActive(true);
+
+        // Pokud už běží odpočet, zastavíme ho
+        if (activeHintCoroutine != null)
         {
-            StartCoroutine(DisplayHint(hintText));
+            StopCoroutine(activeHintCoroutine);
         }
-        else
-        {
-            Debug.LogWarning("Nápověda je prázdná nebo null.");
-        }
+
+        // Spustíme nový odpočet
+        activeHintCoroutine = StartCoroutine(HideHintAfterDelay());
     }
+    private IEnumerator HideHintAfterDelay()
+    {
+        yield return new WaitForSeconds(3f); // Počkej 3 sekundy
+        hintDisplayText.gameObject.SetActive(false);
+    }
+
     private IEnumerator DisplayHint(string hintText)
     {
         // Zobrazí text nápovědy
@@ -153,10 +205,27 @@ public class Inventory : MonoBehaviour
         if (itemIcon != null && itemSpriteRenderer != null)
         {
             itemIcon.sprite = itemSpriteRenderer.sprite;
-            itemIcon.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 50);
-            itemIcon.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 50);
-            itemIcon.color = itemSpriteRenderer.color; // Zkopíruj barvu ze SpriteRenderer do ikony
+            itemIcon.color = itemSpriteRenderer.color;
+
+            // Zajištění zachování poměru stran
+            float spriteWidth = itemIcon.sprite.rect.width;
+            float spriteHeight = itemIcon.sprite.rect.height;
+            float aspectRatio = spriteWidth / spriteHeight;
+
+            // Nastavení velikosti s ohledem na poměr stran
+            float iconSize = 5f; // Nastav pevnou velikost pro nejdelší stranu
+            if (aspectRatio > 1) // Širší než vyšší
+            {
+                itemIcon.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, iconSize);
+                itemIcon.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, iconSize / aspectRatio);
+            }
+            else // Vyšší než širší nebo čtvercové
+            {
+                itemIcon.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, iconSize);
+                itemIcon.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, iconSize * aspectRatio);
+            }
         }
+
         else
         {
             Debug.LogError("Nelze nastavit ikonu předmětu, chybí komponenty!");
@@ -190,12 +259,14 @@ public class Inventory : MonoBehaviour
                 continue;
             }
 
-            // Rozlišení mezi hinty a běžnými předměty
             Hint hintComponent = inventoryItems[i].GetComponent<Hint>();
-            if (hintComponent != null)
+            if (hintComponent != null && inventoryItems[i].name == itemName)
             {
-                Debug.Log($"Položka '{itemName}' je hint. Přeskakuji.");
-                continue;
+                Debug.Log($"Odstraňuji nápovědu: {itemName}");
+                hints.Remove(hintComponent.hintText);
+                Destroy(inventoryItems[i]);
+                inventoryItems.RemoveAt(i);
+                break;
             }
 
             Item itemComponent = inventoryItems[i].GetComponent<Item>();
@@ -204,13 +275,19 @@ public class Inventory : MonoBehaviour
                 Debug.Log($"Odstraňuji předmět: {itemName}");
                 Destroy(inventoryItems[i]);
                 inventoryItems.RemoveAt(i);
-                UpdateInventoryUIAfterRemoval();
-                return;
+                break;
             }
         }
 
-        Debug.LogWarning($"Předmět '{itemName}' nebyl nalezen v inventáři.");
+        // Po odstranění aktualizujeme UI
+        UpdateInventoryUIAfterRemoval();
     }
+
+
+
+
+
+
     public bool HasItem(string itemName)
     {
         Debug.Log($"Kontrola předmětu v inventáři: Hledám '{itemName}'");
@@ -238,24 +315,28 @@ public class Inventory : MonoBehaviour
     {
         foreach (Transform child in slotHolder)
         {
-            Destroy(child.gameObject); // Odstraníme všechny staré sloty
+            Destroy(child.gameObject);
         }
 
-        // Znovu přidáme všechny položky
         foreach (GameObject item in inventoryItems)
         {
-            if (item.GetComponent<Hint>() != null)
+            if (item != null)
             {
-                // Pokud je to hint, aktualizujeme jako hint
                 Hint hint = item.GetComponent<Hint>();
-                UpdateInventoryUIForHint(hint);
-            }
-            else
-            {
-                UpdateInventoryUI(item); // Běžné předměty
+                if (hint != null)
+                {
+                    UpdateInventoryUIForHint(hint, item.name);
+                }
+                else
+                {
+                    UpdateInventoryUI(item);
+                }
             }
         }
     }
+
+
+
 
 
 }

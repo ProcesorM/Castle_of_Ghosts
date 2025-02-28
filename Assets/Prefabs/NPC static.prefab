@@ -208,7 +208,7 @@ MonoBehaviour:
     dialogueText: "Kdysi jsme tu byli brat\u0159i\u2026 Modlili jsme se, studovali,
       ale zlo v hrad\u011B n\xE1s jednoho po druh\xE9m pohltilo. Jsem posledn\xED."
     playerChoices:
-    - choiceText: "Dob\u0159e."
+    - choiceText: "To zn\xED stra\u0161n\u011B."
       nextLineIndex: -1
       startsQuest: 1
       checkForItem: 0

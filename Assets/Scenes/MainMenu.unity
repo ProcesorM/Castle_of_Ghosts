@@ -550,7 +550,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Start
+  m_Text: "Hr\xE1t"
 --- !u!222 &701434124
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -814,7 +814,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: End
+  m_Text: "Ukon\u010Dit"
 --- !u!222 &1142682884
 CanvasRenderer:
   m_ObjectHideFlags: 0

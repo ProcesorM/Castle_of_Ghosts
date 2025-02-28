@@ -39,7 +39,7 @@ public class QuestLog : MonoBehaviour
         }
 
         // Nastavení stylu nadpisu
-        questLogText.text = "<b><size=25><color=yellow>Questy</color></size></b>\n\n";
+        questLogText.text = "<b><size=25><color=yellow>Probíhající questy</color></size></b>\n\n";
 
         foreach (Quest quest in questManager.activeQuests)
         {
